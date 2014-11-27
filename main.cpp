@@ -17,16 +17,13 @@
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
 #include "DelegateHandler.h"
+#include "scene.h"
 
-#define   URL "file:///C:/Users/Sohail/Desktop/Web/index.html"
-
+//#define   URL "file:///C:/Users/Sohail/Desktop/Web/index.html"
+#define   URL "file:///C:/Users/Sohail/Desktop/Web/MadEngine/index.html"
 using namespace Awesomium;
 
 void Viewport();
-void DrawGrid();
-void DrawCube();
-void DrawAxis();
-void DrawTetra();
 
 static void KeyCallback(GLFWwindow* window , int key , int scancode , int action , int mods  );
 static void CursorCallback(GLFWwindow* window , double xpos , double ypos);
@@ -53,17 +50,17 @@ double z = -25;
 
 GLFWwindow* window;
 
+int WebViewWidth = 300;
 
-int leftwall = 300;
 
 int R=0;
 int G=0;
 int B=0;
 
 
-void doit(WebView* caller, const JSArray& args){
+void WebViewResize(WebView* caller, const JSArray& args){
 
-	leftwall = args[0].ToInteger();
+	WebViewWidth = args[0].ToInteger();
 
 }
 
@@ -87,7 +84,7 @@ void SetPosition(WebView* caller, const JSArray& args){
 	position.y= (float)args[1].ToInteger();
 	position.z= (float)args[2].ToInteger();
 
-
+	
 
 	std::cout << "PositionSet :" << position.x;
 
@@ -96,12 +93,13 @@ void SetPosition(WebView* caller, const JSArray& args){
 
 int main(){
 
+
     glfwInit();
-    window = glfwCreateWindow( 1600 , 900, "Basic 3D Viewer" , NULL , NULL );
+    window = glfwCreateWindow( 1600 , 900, "Mad Engine" , NULL , NULL );
     glfwMakeContextCurrent(window);
 
 	WebCore* web_core = WebCore::Initialize(WebConfig());
-	WebView* view = web_core->CreateWebView(200, 480, 0, kWebViewType_Window);
+	WebView* view = web_core->CreateWebView(WebViewWidth, 480, 0, kWebViewType_Window);
 
 	view->set_parent_window( glfwGetWin32Window(window) );
 
@@ -111,17 +109,6 @@ int main(){
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
 
-	//We dont really need to wait
-	//while (view->IsLoading()){
-	// web_core->Update();
-	//}
-	// Sleep a bit and update once more to give scripts and plugins
-	// on the page a chance to finish loading.
-	//Sleep(300);
-	//web_core->Update();
-
-
-	
 	
 	//JS CALLBACKS
 
@@ -129,7 +116,7 @@ int main(){
 	JSObject& app_object = result.ToObject();
 	delegator deler(app_object);
 	
-	deler.customBind( app_object , WSLit("leftwall") , &doit );
+	deler.customBind( app_object , WSLit("WebViewResize") , &WebViewResize );
 	deler.customBind( app_object , WSLit("ChangeColor") ,  &ChangeColor );
 	deler.customBind( app_object , WSLit("SetPosition") ,  &SetPosition );
 
@@ -141,12 +128,23 @@ int main(){
     glfwSetMouseButtonCallback( window , MouseButtonCallback );
     glfwSetScrollCallback( window , ScrollCallback );
 
+
+	//Create Scene, Mesh, Object Lights
+	Mesh Cube;
+	Mesh Tetra;
+	Scene scene;
+
+	Cube = GenerateCube();
+	Tetra = GenerateTetra();
+
+
     while( !glfwWindowShouldClose(window) ){
 
 
 		int width , height;
+
 		glfwGetWindowSize(window , &width , &height);
-		view->Resize(leftwall,height);
+		view->Resize( WebViewWidth , height);
 
 
         Viewport();
@@ -157,10 +155,10 @@ int main(){
         glRotatef( RotateY , 0 , 1.0f , 0  );
 
 
-        DrawGrid();
-        //DrawCube();
-		DrawAxis();
-		DrawTetra();
+		scene.DrawGrid();
+		scene.DrawAxis();
+		Cube.Draw();
+		Tetra.Draw();
 
 		//view->set_js_method_handler(&deler);
 		web_core->Update();
@@ -196,7 +194,7 @@ void Viewport(){
     glDepthFunc(GL_LESS);
 
 	//Add Gui Offset here for awesomium
-    glViewport(leftwall , 0 , width , height);
+	glViewport(WebViewWidth , 0 , width , height);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
@@ -213,214 +211,6 @@ void Viewport(){
 
 
 }
-
-void DrawCube(){
-
-    GLfloat vertices[] = {
-//back
-        -1.0, -1.0,  -1.0,  //0 Bottom left
-         1.0, -1.0,  -1.0,  //1 Bottom right
-        -1.0,  1.0,  -1.0,  //2 Top Left
-         1.0,  1.0,  -1.0,  //3 Top Right
-//front
-        -1.0, -1.0,  1.0,   //4 Bottom left
-         1.0, -1.0,  1.0,   //5 Bottom right
-        -1.0,  1.0,  1.0,   //6 Top Left
-         1.0,  1.0,  1.0    //7 Top Right
-
-    };
-
-
-    GLubyte colors[] =
-    {
-
-      R,G,B,       //0 Bottom left
-      R,G,B,       //1 Bottom right
-      R,G,B,       //2 Top Left
-      R,G,B,       //3 Top Right
-		
-      R,G,B,       //4 Bottom left
-      R,G,B,       //5 Bottom right
-      R,G,B,       //6 Top Left
-      R,G,B        //7 Top Right
-    };
-
-    // 8 of vertex coords
-    // 24 indices
-    GLubyte indices[] = {0,1,3,2, //back face
-                         4,5,7,6, //front face
-                         0,1,5,4, //Bottom face
-                         2,3,7,6, //Top face
-                         1,3,7,5, //Right face
-                         0,2,6,4  //Left face
-                        };
-
-    // Activate Vertex and Color Buffer
-    glEnableClientState( GL_VERTEX_ARRAY);
-    glEnableClientState( GL_COLOR_ARRAY );
-
-    // Specify Color Buffer
-    glColorPointer( 3, GL_UNSIGNED_BYTE, 0, colors );
-    // Specify pointer to vertex array
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-    // draw a cube
-    glDrawElements(GL_QUADS, (sizeof(indices)/sizeof(*indices)) , GL_UNSIGNED_BYTE, indices);
-    //std::cout << (sizeof(indices)/sizeof(*indices));
-
-    // deactivate vertex arrays after drawing
-    glDisableClientState(GL_VERTEX_ARRAY);
-
-}
-
-
-void DrawTetra(){
-
-	
-
-	glTranslatef(position.x , position.y , position.z);
-
-
-    GLfloat vertices[] = {
-
-		/* -1.0,  0.0,   -1/sqrtf(2),  
-         1.0,  0.0,   -1/sqrtf(2),			
-         0.0,  -1.0,   1/sqrtf(2),			
-         0.0,  1.0,   1/sqrtf(2),	*/		
-
-
-		1,1,1,
-		1, -1,-1,
-		-1,1,-1,
-		-1,-1,1
-    };
-
-
-	//(1,1,1), (1,−1,−1), (−1,1,−1), (−1,−1,1)
-
-
-
-    GLubyte colors[] =
-    {
-
-      R,G,B,       //0 Bottom left
-      R,G,B,       //1 Bottom right
-      R,G,B,       //2 Top Left
-      R,G,B,       //3 Top Right
-		
-    };
-
-    // 8 of vertex coords
-    // 24 indices
-    GLubyte indices[] = {
-		
-					0,1,
-					0,2,
-					0,3,
-					1,2,
-					1,3,
-					2,3
-                        };
-
-    // Activate Vertex and Color Buffer
-    glEnableClientState( GL_VERTEX_ARRAY);
-    glEnableClientState( GL_COLOR_ARRAY );
-
-    // Specify Color Buffer
-    glColorPointer( 3, GL_UNSIGNED_BYTE, 0, colors );
-    // Specify pointer to vertex array
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-    // draw a cube
-    glDrawElements(GL_LINES, (sizeof(indices)/sizeof(*indices)) , GL_UNSIGNED_BYTE, indices);
-    //std::cout << (sizeof(indices)/sizeof(*indices));
-
-    // deactivate vertex arrays after drawing
-    glDisableClientState(GL_VERTEX_ARRAY);
-	glLoadIdentity();
-}
-
-
-
-void DrawGrid(){
-
-
-    glBegin(GL_LINES);
-    glColor3f(0.7f, 0.7f, 0.7f);
-
-    for(int i = -10 ; i <= 10 ; i++  ){
-
-        glVertex3f(  i, 0,-10);
-        glVertex3f(  i, 0, 10);
-
-        glVertex3f(  -10, 0, i);
-        glVertex3f(   10, 0, i);
-
-        //glVertex3f(  i, -10,0);
-        // glVertex3f(  i, 10, 0);
-
-        //glVertex3f(  -10, i, 0);
-        //glVertex3f(   10, i, 0);
-
-    }
-    glEnd();
-
-
-}
-
-void DrawAxis(){
-
-
-	glLineWidth( 5.0f );
-	glEnable(GL_LINE_SMOOTH);
-
-    GLfloat vertices[] = {
-
-		 0.0,  0.0,   0.0,	
-         10.0,  0.0,   0.0,  
-         0.0,  10.0,   0.0,  
-         0.0,  0.0,   10.0,  
-
-    };
-
-
-    GLubyte colors[] =
-    {
-
-      255,255,255, 
-      255,0,0,       
-      0,255,0,       
-      0,0,255,       
-		
-    };
-
-    // 8 of vertex coords
-    // 24 indices
-    GLubyte indices[] = {0,1,
-                         0,2,
-                         0,3,
-                        };
-
-    // Activate Vertex and Color Buffer
-    glEnableClientState( GL_VERTEX_ARRAY);
-    glEnableClientState( GL_COLOR_ARRAY );
-
-    // Specify Color Buffer
-    glColorPointer( 3, GL_UNSIGNED_BYTE, 0, colors );
-    // Specify pointer to vertex array
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-    // draw a cube
-	glDrawElements(GL_LINES, (sizeof(indices)/sizeof(*indices)) , GL_UNSIGNED_BYTE, indices);
-    //std::cout << (sizeof(indices)/sizeof(*indices));
-
-    // deactivate vertex arrays after drawing
-    glDisableClientState(GL_VERTEX_ARRAY);
-	glLineWidth( 1.0f );
-	glDisable(GL_LINE_SMOOTH);
-
-}
-
 
 
 
@@ -483,8 +273,8 @@ static void CursorCallback(GLFWwindow* window , double xpos , double ypos){
 
     if(Move == 1){
 
-        float deltaX = xpos - lastX ;
-        float deltaY = ypos - lastY;
+        float deltaX = float(xpos - lastX) ;
+        float deltaY = float(ypos - lastY);
 
         MoveX +=  0.01f * deltaX;
         MoveY +=  0.01f * deltaY;
@@ -496,8 +286,8 @@ static void CursorCallback(GLFWwindow* window , double xpos , double ypos){
 
     if(rotateControl == 1 ){
 
-        float deltaX = xpos - lastX ;
-        float deltaY = ypos - lastY;
+        float deltaX = float(xpos - lastX) ;
+        float deltaY = float(ypos - lastY);
 
         RotateX +=  0.1f * deltaY;
         RotateY +=  0.1f * deltaX;
