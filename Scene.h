@@ -16,7 +16,6 @@ public:
 
 
 
-
 void DrawAxis(){
 
 
@@ -59,7 +58,6 @@ void DrawAxis(){
     // Specify pointer to vertex array
     glVertexPointer(3, GL_FLOAT, 0, vertices);
 
-    // draw a cube
 	glDrawElements(GL_LINES, (sizeof(indices)/sizeof(*indices)) , GL_UNSIGNED_BYTE, indices);
     //std::cout << (sizeof(indices)/sizeof(*indices));
 
