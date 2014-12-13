@@ -1,5 +1,6 @@
-﻿#include <glm\glm.hpp>
+﻿#include <glm/glm.hpp>
 #include <vector>
+#include "shader.hpp"
 
 class Mesh{
 
@@ -15,20 +16,21 @@ class Mesh{
 		
 
 	
+	
 	}
 
 
 
 	void Draw(){
-
-	
+		
 	// Activate Vertex and Color Buffer
     glEnableClientState( GL_VERTEX_ARRAY);
-    glEnableClientState( GL_COLOR_ARRAY );
+    //glEnableClientState( GL_COLOR_ARRAY );
 
     // Specify Color Buffer
-	glColorPointer( 3, GL_UNSIGNED_BYTE, 0, colors.data()  );
+	//glColorPointer( 3, GL_UNSIGNED_BYTE, 0, colors.data()  );
     // Specify pointer to vertex array
+    
 	glVertexPointer(3, GL_FLOAT, 0, Vertex.data() );
 
     // draw a cube
@@ -37,7 +39,7 @@ class Mesh{
 
     // deactivate vertex arrays after drawing
     glDisableClientState(GL_VERTEX_ARRAY);
-	
+
 	}
 
 

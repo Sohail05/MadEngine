@@ -39,7 +39,7 @@ public:
 
 	void OnMethodCall(WebView* caller,unsigned int remote_object_id, const WebString& method_name,const Awesomium::JSArray& args) {
 		// Find the method that matches the object id + method name
-		std::map<ObjectMethodKey, JSDelegate>::iterator i = 
+		std::map<ObjectMethodKey, JSDelegate>::iterator i =
 			bound_methods_.find(ObjectMethodKey(remote_object_id, method_name));
 
 		// Call the method

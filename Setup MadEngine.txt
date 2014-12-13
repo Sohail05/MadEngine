@@ -1,0 +1,37 @@
+include:
+
+glm
+glfw
+awesomium
+
+..\glm;
+..\include;
+$(AWE_DIR)include
+
+
+
+
+libraries dir:
+
+C:\OpenGL\glfw-3.0.4.bin.WIN32\lib-msvc110;
+C:\OpenGL\glew-1.11.0\glew-1.11.0\lib\Debug\Win32;
+$(AWE_DIR)build\lib;
+%(AdditionalLibraryDirectories)
+
+
+dependencies:
+
+opengl32.lib;
+glu32.lib;
+glew32d.lib;
+glew32sd.lib;
+glfw3.lib;
+glfw3dll.lib;
+awesomium.lib;
+
+Else:
+
+
+include awesomium Build\bin files with binary
+include glfw3.dll and glew32.dll (depending if it's static or dynamic )
+

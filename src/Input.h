@@ -3,7 +3,7 @@
 
 
 #include <iostream>
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 class Input{
 public:
@@ -15,7 +15,7 @@ public:
 
 	static Input *event_handling_instance;
 
-	virtual void setEventHandling() final { event_handling_instance = this; }
+	virtual void setEventHandling() /*final only available with c++ 11*/ { event_handling_instance = this; }
 
 	static void  keycallback_dispatch(GLFWwindow *window,int key,int scancode,int action,int mods)
 	{

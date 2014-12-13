@@ -1,11 +1,20 @@
-﻿#ifdef _WIN32 
+#ifdef _WIN32
 #include <Windows.h>
 #endif
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#ifdef _WIN32
 #define GLFW_EXPOSE_NATIVE_WIN32
 #define GLFW_EXPOSE_NATIVE_WGL
+#endif
+
+#ifdef __linux__
+#define GLFW_EXPOSE_NATIVE_X11
+#define GLFW_EXPOSE_NATIVE_GLX
+#endif
+
 #include <GLFW/glfw3native.h>
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
@@ -14,53 +23,95 @@
 #include <cmath>
 #include "MadCore.h"
 
-#define   URL "file:///C:/Users/Sohail/Desktop/Web/MadEngine/index.html"
+//#define   URL "file:///C:/Users/Sohail/Desktop/Web/MadEngine/index.html"
+#define   URL "file:///home/madman/Desktop/web/index.html"
 
 using namespace Awesomium;
 
-//void KeyCallback(GLFWwindow* window , int key , int scancode , int action , int mods  );
-
 int main(){
-
-	/*
-	GLenum err = glewInit();
-	if (GLEW_OK != err)
-	{
-		// failed to initialize GLEW!
-	}
-	std::cout << "Using GLEW Version: "  << glewGetString(GLEW_VERSION);
-	*/
 
 	glfwInit();
 
 	GLFWwindow* window;
 	window = glfwCreateWindow( 1600 , 900, "Mad Engine" , NULL , NULL );
 	glfwMakeContextCurrent(window);
-
+        
+  // get version info
+  const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
+  const GLubyte* version = glGetString (GL_VERSION); // version as a string
+  printf ("Renderer: %s\n", renderer);
+  printf ("OpenGL version supported %s\n", version);
+  
+  GLenum err = glewInit();
+if (GLEW_OK != err)
+{
+  /* Problem: glewInit failed, something is seriously wrong. */
+  fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+}
+fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	WebCore* web_core = WebCore::Initialize( config );
 	WebView* view = web_core->CreateWebView(300, 900, 0, kWebViewType_Window); //kWebViewType_Offscreen
-	view->set_parent_window( glfwGetWin32Window(window) );
 
-	
+//	#ifdef _WIN32
+//	view->set_parent_window( glfwGetWin32Window(window) );
+//	#endif
+
 	//Load WebPage/Interface
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
 
-
 	Scene scene;
 	Control control(window);
 	Camera cam(window);
+	Mesh Cube;
+	Cube = GenerateCube();
 	
+	/*
+	const char* vertex_shader =
+"#version 150\n"
+"in vec3 vp;"
+"void main () {"
+"  gl_Position = vec4 (vp, 1.0);"
+"}";
 
+const char* fragment_shader =
+"#version 150\n"
+"out vec4 frag_colour;"
+"void main () {"
+"  frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
+"}";
+
+GLuint vs = glCreateShader (GL_VERTEX_SHADER);
+glShaderSource (vs, 1, &vertex_shader, NULL);
+glCompileShader (vs);
+GLuint fs = glCreateShader (GL_FRAGMENT_SHADER);
+glShaderSource (fs, 1, &fragment_shader, NULL);
+glCompileShader (fs);
+
+GLuint shader_programme = glCreateProgram ();
+glAttachShader (shader_programme, fs);
+glAttachShader (shader_programme, vs);
+glLinkProgram (shader_programme);
+	
+	
+	*/
+	
+		// Create and compile our GLSL program from the shaders
+	 GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
+
+	
 
 	while( !glfwWindowShouldClose(window) ){
 
 		cam.Viewport();
 		scene.DrawAxis();
 		scene.DrawGrid();
+		glUseProgram(programID);
+		Cube.Draw();
+		glUseProgram(0);
 		web_core->Update();
 		glfwSwapBuffers(window);
 		glfwSwapInterval(1);
@@ -77,29 +128,10 @@ int main(){
 	return 0;
 }
 
-/*
-void KeyCallback(GLFWwindow* window , int key , int scancode , int action , int mods  ){
-
-	if(action == GLFW_PRESS)
-		switch( key ){
-
-		case GLFW_KEY_ESCAPE:
-
-			glfwSetWindowShouldClose(window , GL_TRUE );
-			break;
-
-	}
-
-}
-*/
-
-
 //Window Resize -> add to callback
 //int width , height;
 //glfwGetWindowSize(window , &width , &height);
 //view->Resize( 300 , height);
-
-
 
 
 /* bind texture

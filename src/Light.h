@@ -1,8 +1,13 @@
 #include "Color.h"
-#include <GL\GL.h>
+
+	  #ifdef __APPLE__
+	  #include <OpenGL/gl.h>
+	  #else
+	  #include <GL/gl.h>
+	  #endif
 
 
-enum LightMode
+enum /* class only available in c++ 11*/ LightMode
 {
 	point = 0,
 	directional = 1,
@@ -23,7 +28,7 @@ public:
 	Light(){
 		
 		color = Color( 255 , 255 , 255 , 1.0f );
-		LightType = LightMode::point;
+		LightType = point;
 
 	}
 

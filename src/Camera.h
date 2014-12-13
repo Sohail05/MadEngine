@@ -1,7 +1,9 @@
 #include "Input.h"
+#ifdef _WIN32
 #include <Windows.h>
-#include <gl\GLU.h>
-#include "glm\glm.hpp"
+#endif
+#include <GL/glu.h>
+#include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
 class Camera : Input {

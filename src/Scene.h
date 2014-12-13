@@ -1,4 +1,4 @@
-#include <glm\glm.hpp>
+#include <glm/glm.hpp>
 #include <vector>
 #include "Tranform.h"
 #include "Mesh.h"

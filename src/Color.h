@@ -10,7 +10,7 @@ class Color{
 
 public:
 	Color( int r , int g, int b , float a ){
-	
+
 		R=r;
 		G=g;
 		B=b;
@@ -20,7 +20,7 @@ public:
 
 
 		Color(){
-	
+
 		R=255;
 		G=0;
 		B=255;
