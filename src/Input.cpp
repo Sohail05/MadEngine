@@ -14,6 +14,8 @@ void Control::keycallback(GLFWwindow *window, int key,int scancode,int action,in
 			glfwSetWindowShouldClose(window , GL_TRUE );
 			break;
 	}
+
+
 }
 
 void Control::cursorcallback(GLFWwindow* window , double xpos , double ypos){
@@ -22,7 +24,7 @@ void Control::cursorcallback(GLFWwindow* window , double xpos , double ypos){
 
 
 void Control::MouseButtonCallback(GLFWwindow* window , int button , int action , int mods ){
-	std::cout << "Button pressed";
+	std::cout << "Button pressed: " << button;
 }
 
 

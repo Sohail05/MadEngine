@@ -1,11 +1,10 @@
+#ifndef LIGHT_H
+#define LIGHT_H
+
 #include "Color.h"
-
-	  #ifdef __APPLE__
-	  #include <OpenGL/gl.h>
-	  #else
-	  #include <GL/gl.h>
-	  #endif
-
+#include <GL\glew.h>
+#include <glm\glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 enum /* class only available in c++ 11*/ LightMode
 {
@@ -15,21 +14,43 @@ enum /* class only available in c++ 11*/ LightMode
 };
 
 
-class Light{
+class Light : Component {
 
 private:
 	LightMode LightType;
 
 public:	
 
-	Tranform transform;
+	glm::vec3 Position;
+
+
 	Color color;
 
-	Light(){
-		
+	Light() : Position(0.0f , 2.0f , 0.0f ){
+
 		color = Color( 255 , 255 , 255 , 1.0f );
 		LightType = point;
 
+
 	}
 
+
+
+	void Update(){
+
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(Position));
+
+	}
+	void Enable(){
+	}
+	void Disable(){
+	}
+
+
+
+
+
+
 };
+
+#endif

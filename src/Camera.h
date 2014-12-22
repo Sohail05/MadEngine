@@ -1,37 +1,53 @@
+#ifndef CAMERA_H
+#define CAMERA_H
+
+#include <gl\glew.h>
+#include <gl\GLU.h>
+#include "Context.h"
 #include "Input.h"
-#ifdef _WIN32
-#include <Windows.h>
-#endif
-#include <GL/glu.h>
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+#include "Transform.h"
+
+
+/**********
+References:
+
+Roll
+1	0	0
+0  cos -sin
+0  sin cos
+
+Pitch
+cos	0	sin
+0	1	0
+-sin	0	cos
+
+Yaw
+cos	 -sin	0
+sin	  cos	0
+0	0	0
+*****/
+
+
+
+
+enum ViewMode{
+
+	Orthographic = 0,
+	Perspective = 1
+	//Add Panorama
+	//Add Fish Eye
+
+};
+
 
 class Camera : Input {
 public:
 
 	GLFWwindow* window;
-
+	ViewMode CameraViewMode;
+	Transform transform;
 
 	float zoom;
-	int WebViewWidth;
-	int viewmode;
-
-	float MoveX;
-	float MoveY;
-	float RotateX;
-	float RotateY;
-
-	double lastX;
-	double lastY;
-
-	int Move;
-	float xrot;
-
-	int rotateControl;
-
-	double z;
-
-
 
 	double fovy;
 	double aspectratio;
@@ -39,29 +55,41 @@ public:
 	double zFar; 
 
 
+	double lastX;
+	double lastY;
+
+	//Rotation Controls
+	bool Roll;		//NF
+	bool Yaw;		//NF
+	bool Pitch;		//NF
+
+	bool OrbitX;
+	bool OrbitY;
+
+	//Position Controls
+	bool Pan;
+
+	bool Zoom;
+
 
 	Camera(GLFWwindow* win)
 	{
 		window = win;
 		zoom=5;
-		WebViewWidth =300;
-		viewmode = 1;
 
-		RotateX=30;
-		z = -25;
-		 MoveX=0;
-		 MoveY=0;
-		 RotateY=0;
-		 lastY=0;
-		 lastX=0;
+		CameraViewMode = ViewMode::Perspective;
+
+		transform.Rotation = glm::vec3(30.0f , 0 , 0 );
+		transform.Position = glm::vec3(0.0f , 0.0f ,-25.0f);
+
+		lastY=0;
+		lastX=0;
 
 		fovy = 45.0f;
-		aspectratio;
 		zNear=1;
 		zFar=500; 
 
-		event_handling_instance = this;
-		//setEventHandling(); this doesnt work ... perhaps because of controls() or "final"
+		setEventHandling();
 
 	}
 
@@ -84,17 +112,19 @@ public:
 		// Accept fragment if it closer to the camera than the former one
 		glDepthFunc(GL_LESS);
 
-		//Add Gui Offset here for awesomium
-		glViewport(WebViewWidth , 0 , width , height);
+		glViewport( 0 , 0 , width , height);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 
-		if (viewmode == 0){
+		if (CameraViewMode == ViewMode::Orthographic){
+
 			glOrtho(-aspectratio*zoom, aspectratio*zoom, -1.f*zoom, 1.f*zoom, 1.f, 500.f);
 			glMatrixMode(GL_MODELVIEW);
+
 		}else{
+
 			gluPerspective( fovy , aspectratio , zNear , zFar);
 			//glm::perspective(  &zNear , &aspectratio , &zNear , &zFar);
 			glMatrixMode(GL_MODELVIEW);
@@ -102,15 +132,16 @@ public:
 		glLoadIdentity();
 
 
-		glTranslatef(MoveX , -MoveY , (GLfloat)z );
-		glRotatef( RotateX , 1.0f , 0 , 0  );
-		glRotatef( RotateY , 0 , 1.0f , 0  );
+		//Replace with GLM
+		glTranslatef(transform.Position.x , -transform.Position.y, transform.Position.z );
+		glRotatef( transform.Rotation.x , 1.0f , 0 , 0  );
+		glRotatef( transform.Rotation.y , 0 , 1.0f , 0  );
 
 	}
-
-
-
 
 private:
 
 };
+
+
+#endif

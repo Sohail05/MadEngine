@@ -77,3 +77,60 @@ public:
 	}//end bind
 
 };//end class
+
+
+
+
+//Callbacks
+
+/*
+
+//JS CALLBACKS
+
+JSValue result = view->CreateGlobalJavascriptObject(WSLit("app"));
+JSObject& app_object = result.ToObject();
+delegator deler(app_object);
+
+deler.customBind( app_object , WSLit("WebViewResize") , &WebViewResize );
+deler.customBind( app_object , WSLit("ChangeColor") ,  &ChangeColor );
+deler.customBind( app_object , WSLit("SetPosition") ,  &SetPosition );
+
+view->set_js_method_handler(&deler);
+//
+
+
+
+
+void WebViewResize(WebView* caller, const JSArray& args){
+
+WebViewWidth = args[0].ToInteger();
+
+}
+
+
+
+void ChangeColor(WebView* caller, const JSArray& args){
+
+
+R=args[0].ToInteger();
+G=args[1].ToInteger();
+B=args[2].ToInteger();
+
+
+}
+glm::vec3 position;
+
+void SetPosition(WebView* caller, const JSArray& args){
+
+
+position.x= (float)args[0].ToInteger();
+position.y= (float)args[1].ToInteger();
+position.z= (float)args[2].ToInteger();
+
+
+
+std::cout << "PositionSet :" << position.x;
+
+}
+
+*/
