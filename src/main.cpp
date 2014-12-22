@@ -1,7 +1,7 @@
+#include "Surface.h"
 #include "MadCore.h"
 #include <gl\glew.h>
 #include <GLFW\glfw3.h>
-#include <Awesomium\BitmapSurface.h>
 
 
 GLuint textureID;
@@ -42,43 +42,59 @@ int main(){
 
 
 
-	while( context.view->IsLoading() == true ){
-		context.web_core->Update();
-	}
+	//while( context.view->IsLoading() == true ){
+	//	context.web_core->Update();
+	//}
 
-	//glDeleteTextures(1, &textureID);
-	Context::MainContext->NeedUpdate = true;
+	//TestSurface* surfacex;
+	//TestFactory testfac;
 
+	//SurfaceFactory* fac = (SurfaceFactory*)&testfac;
+
+	//context.web_core->set_surface_factory( &testfac );
+
+	 //surfacex = (TestSurface*)(context.view->surface());
+	 
 	while( !Context::MainContext->ShouldClose() ){
 
 
+		cam.Viewport();
+		
+		
 		if(Context::MainContext->NeedUpdate == true){
 
-			glDeleteTextures(1, &textureID);
-			context.web_core->Update();
+			//glDeleteTextures(1, &textureID);
+			
 			Surface* surfacex = context.view->surface();
-			BitmapSurface* surface = static_cast<BitmapSurface*>(surfacex);
 
-			int w = surface->width();
-			int h = surface->height();
+			TestSurface* surface = (TestSurface*)(surfacex);
+			
+			BitmapSurface* bit;
 
+			bit = (BitmapSurface*)surface;
+
+			int w = bit->width();
+			int h = bit->height();
+			/*
 			unsigned char *buffer = new unsigned char[w * h * 4];
 			surface->CopyTo(buffer, w * 4, 4, false, false);
-
+			*/
 
 			glGenTextures(1, &textureID);
 			glBindTexture(GL_TEXTURE_2D, textureID);
 			glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 			// build our texture mipmaps
-			gluBuild2DMipmaps(GL_TEXTURE_2D, 4, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-
-			delete[] buffer;
-
+			//gluBuild2DMipmaps(GL_TEXTURE_2D, 4, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, 4, w, h, GL_RGBA, GL_UNSIGNED_BYTE, bit->buffer());
+			//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,w, h, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, bit->buffer());
+			/*delete[] buffer;
+			*/
 			Context::MainContext->NeedUpdate = false;
+			
 			std::cout << "!";
 		}
 
-		cam.Viewport();
+		
 		//glBindTexture(GL_TEXTURE_2D, textureID);
 
 		glEnable(GL_TEXTURE_2D);
@@ -93,6 +109,7 @@ int main(){
 
 		glDisable(GL_TEXTURE_2D);
 
+		context.web_core->Update();
 		scene.Update();
 
 		Context::MainContext->Update();

@@ -1,8 +1,6 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-
-
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 

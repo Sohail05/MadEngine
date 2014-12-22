@@ -26,9 +26,17 @@ EditorContext::EditorContext(int width , int height, char* title){
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
+
+
+	testfac = TestFactory();
+	//SurfaceFactory* fac = (SurfaceFactory*)&testfac;
+	web_core->set_surface_factory( &testfac );
+
 	//view = web_core->CreateWebView(300, 900, 0, kWebViewType_Window); //kWebViewType_Offscreen
 	view = web_core->CreateWebView(width, height, 0, kWebViewType_Offscreen);
 	view->SetTransparent(true);
+
+/* For Onscreen view
 #ifdef __linux__  
 	view->set_parent_window( glfwGetX11Window(window) );
 #endif
@@ -36,6 +44,8 @@ EditorContext::EditorContext(int width , int height, char* title){
 #ifdef _WIN32  
 	//view->set_parent_window( glfwGetWin32Window(window) );
 #endif
+*/
+
 
 	//Load WebPage/Interface
 	WebURL url(WSLit(URL));

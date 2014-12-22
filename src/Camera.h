@@ -28,8 +28,6 @@ sin	  cos	0
 *****/
 
 
-
-
 enum ViewMode{
 
 	Orthographic = 0,

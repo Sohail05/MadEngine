@@ -2,7 +2,7 @@
 #define CONTEXT_H
 
 #include <Awesomium/WebCore.h>
-#include <Awesomium/BitmapSurface.h>
+//#include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
 #include <iostream>
 #ifdef _WIN32
@@ -14,7 +14,7 @@
 #define GLFW_EXPOSE_NATIVE_X11
 #define GLFW_EXPOSE_NATIVE_GLX
 #endif
-
+#include "Surface.h"
 #include <gl\glew.h>
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
@@ -53,7 +53,7 @@ private:
 class EditorContext : Context {
 
 public:
-
+	TestFactory testfac;
 	GLFWwindow* window;
 	WebCore* web_core;
 	WebView* view;

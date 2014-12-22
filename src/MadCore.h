@@ -31,7 +31,7 @@
 #include <GLFW/glfw3native.h>
 
 #include <Awesomium/WebCore.h>
-#include <Awesomium/BitmapSurface.h>
+//#include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
 
 #include <iostream>
