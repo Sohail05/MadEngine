@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+//Leave this until Offscreen view is properly implemented 
+
 using namespace Awesomium;
 
 

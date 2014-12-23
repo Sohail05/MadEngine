@@ -11,11 +11,16 @@ class Mesh : Component{
 
 public:
 
-
 	std::vector<GLfloat> Vertex;
+	//Todo: Need to get Triangle Data
 	std::vector<GLubyte> Indices;
+
+	//Todo: Make Shaders Globaly accessble by all Mesh Components to avoid multiple same shader to be compiled
 	Shader shader;
-	
+
+	//Design TTA: Does Mesh really need a color?
+	//If I leave it in each mesh will have it's own color with a shared shader
+	//but all objects using the same Shader can't all sync with the same color EX: Duplicate Objects
 	Color color;
 	int Mode;
 
@@ -24,24 +29,25 @@ public:
 		Enable();
 		shader = Shader();
 
+
 	}
 
 	void Update(){
-	
 
 		if(Active){
-		Draw();
+			Draw();
 		}
-	
+
 	}
 
+	//Todo: Move to Component Class
 	void Enable(){
 
 		Active = true;
-	
+
 	}
 	void Disable(){
-	
+
 
 		Active = false;
 	}
@@ -56,15 +62,19 @@ public:
 		//Use Shader
 		glUseProgram(shader.shaderProgram);
 
+		//Todo: Creat a struct or class to hold all IDs
+		//Design:  Should only need to do this once
+
 		GLuint PositionID = glGetUniformLocation(shader.shaderProgram, "Position");
-		//glUniform1f(MatrixID, col);
 		glUniform3fv(PositionID, 1, glm::value_ptr(transform->Position) );
-		
 
 		GLuint ColorID = glGetUniformLocation(shader.shaderProgram, "color");
+		//Ugly: is there a cleaner way ? 
 		glUniform4f(ColorID, color.R , color.G , color.B , color.A );
 
 		//Draw Mesh with Indices
+		//Design: Should Thing about implementing VBOs in a VAB 
+		//TTA: Should I also Generate a buffer and leave the vertices in there ?
 		glDrawElements(Mode, Indices.size() , GL_UNSIGNED_BYTE, Indices.data() );
 
 		//Disable Shader

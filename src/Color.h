@@ -1,18 +1,21 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-/*
+/* Implement something like so:
+ex:
+Color NewColor = Color.Red;
+
 enum Colors
 {
-Black	= 0,
-Blue	= 0,
-Green	= 0,
-Cyan	= 0,
-Red		= 0,
-Magenta	= 0,
-Brown	= 0,
-Yellow	= 0,
-White	= 0,
+Black	,
+Blue	,
+Green	,
+Cyan	,
+Red		,
+Magenta	,
+Brown	,
+Yellow	,
+White	,
 
 };
 */
@@ -23,7 +26,7 @@ class Color{
 
 public:
 
-
+	//Todo: figure out a General purpose approch with multiple format support
 	//Hex format 0x FF FF FF
 	//RGB 255 255 255
 	//RGBA 255 255 255 1
@@ -78,6 +81,5 @@ public:
 
 
 };
-
 
 #endif

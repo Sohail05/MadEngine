@@ -1,8 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <gl\glew.h>
-#include <gl\GLU.h>
 #include "Context.h"
 #include "Input.h"
 #include "Transform.h"
@@ -32,8 +30,8 @@ enum ViewMode{
 
 	Orthographic = 0,
 	Perspective = 1
-	//Add Panorama
-	//Add Fish Eye
+	//Todo: Add Panorama
+	//Todo: Add Fish Eye
 
 };
 
@@ -57,15 +55,16 @@ public:
 	double lastY;
 
 	//Rotation Controls
-	bool Roll;		//NF
-	bool Yaw;		//NF
-	bool Pitch;		//NF
+	bool Roll;		//Not implemented
+	bool Yaw;		//Not implemented
+	bool Pitch;		//Not implemented
 
 	bool OrbitX;
 	bool OrbitY;
 
 	//Position Controls
 	bool Pan;
+
 
 	bool Zoom;
 
@@ -87,7 +86,7 @@ public:
 		zNear=1;
 		zFar=500; 
 
-		setEventHandling();
+		SetMainInput();
 
 	}
 
@@ -100,14 +99,12 @@ public:
 
 	void Viewport(){
 
+		//Todo: Set Aspect Ratio to a public member
 		int width , height;
-
 		glfwGetWindowSize(window , &width , &height);
 		aspectratio = width / (float)height ;
 
-		// Enable depth test
 		glEnable(GL_DEPTH_TEST);
-		// Accept fragment if it closer to the camera than the former one
 		glDepthFunc(GL_LESS);
 
 		glViewport( 0 , 0 , width , height);
@@ -124,13 +121,12 @@ public:
 		}else{
 
 			gluPerspective( fovy , aspectratio , zNear , zFar);
-			//glm::perspective(  &zNear , &aspectratio , &zNear , &zFar);
+			//Implement glm::perspective(  &zNear , &aspectratio , &zNear , &zFar);
 			glMatrixMode(GL_MODELVIEW);
 		}
 		glLoadIdentity();
 
-
-		//Replace with GLM
+		//Todo: Implement with GLM here
 		glTranslatef(transform.Position.x , -transform.Position.y, transform.Position.z );
 		glRotatef( transform.Rotation.x , 1.0f , 0 , 0  );
 		glRotatef( transform.Rotation.y , 0 , 1.0f , 0  );

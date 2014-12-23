@@ -1,6 +1,6 @@
 #include "Input.h"
 
-Input* Input::event_handling_instance;
+Input* Input::MainInputHandler;
 
 void Control::keycallback(GLFWwindow *window, int key,int scancode,int action,int mods)
 {

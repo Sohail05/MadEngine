@@ -8,13 +8,9 @@ class Scene{
 
 public:
 
-	//std::vector<Light> Lights;
-	//std::vector<Mesh> Meshs;
-
 	std::vector<Entity3D> Entities;
 
-
-	//Skybox
+	//Todo: Implement A Skybox :D
 
 	void Update(){
 
@@ -27,6 +23,7 @@ public:
 
 		}
 
+		//Optional: A small viewport or such with 3D Orientations displayed
 		//DrawAxisCude();
 
 	}
@@ -36,6 +33,7 @@ public:
 		Entities.push_back( E );
 	}
 
+	/*
 	void DrawAxisCude(){
 
 
@@ -62,7 +60,7 @@ public:
 
 
 	}
-
+	*/
 
 	void DrawAxis(){
 
@@ -95,19 +93,14 @@ public:
 			0,3,
 		};
 
-		// Activate Vertex and Color Buffer
 		glEnableClientState( GL_VERTEX_ARRAY);
 		glEnableClientState( GL_COLOR_ARRAY );
 
-		// Specify Color Buffer
 		glColorPointer( 3, GL_UNSIGNED_BYTE, 0, colors );
-		// Specify pointer to vertex array
 		glVertexPointer(3, GL_FLOAT, 0, vertices);
 
 		glDrawElements(GL_LINES, (sizeof(indices)/sizeof(*indices)) , GL_UNSIGNED_BYTE, indices);
-		//std::cout << (sizeof(indices)/sizeof(*indices));
 
-		// deactivate vertex arrays after drawing
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glLineWidth( 1.0f );
 		glDisable(GL_LINE_SMOOTH);

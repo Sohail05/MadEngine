@@ -2,6 +2,7 @@
 
 Context* Context::MainContext;
 
+//todo : Overload with the param version
 EditorContext::EditorContext(){
 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
@@ -26,11 +27,6 @@ EditorContext::EditorContext(int width , int height, char* title){
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
-
-
-	testfac = TestFactory();
-	//SurfaceFactory* fac = (SurfaceFactory*)&testfac;
-	web_core->set_surface_factory( &testfac );
 
 	//view = web_core->CreateWebView(300, 900, 0, kWebViewType_Window); //kWebViewType_Offscreen
 	view = web_core->CreateWebView(width, height, 0, kWebViewType_Offscreen);

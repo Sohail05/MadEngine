@@ -16,7 +16,6 @@ public:
 	Transform transform;
 	std::vector<Component*> Components;
 
-
 	void Update(){
 
 		for(std::size_t i = 0 ; i < Components.size() ; i++ ){
@@ -26,19 +25,13 @@ public:
 	}
 
 
-
+	//Todo: Implement a way to get component of type X
 	void AddComponent(Component* C){
 
 		C->transform = &transform ;
 		Components.push_back( C );
 	}
 
-
-	//Overloading temp solution for easy components implimentation
-	//void AddComponent(Mesh M){
-
-	//	AddComponent( (Component*)&M );
-	//}
 
 
 private:

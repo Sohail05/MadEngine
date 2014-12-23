@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+//Todo: Make Shaders Globaly accessble by all Mesh Components to avoid multiple same shader to be compiled
+
 class Shader {
 
 public:

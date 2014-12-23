@@ -67,7 +67,7 @@ void Camera::cursorcallback(GLFWwindow* window , double xpos , double ypos){
 		lastY = ypos;
 	}
 
-/* splited them into yaw and pitch
+/* splited them into OrbitX and OrbitY
 	if(rotateControl == 1 ){
 
 		float deltaX = (float)(xpos - lastX) ;
@@ -129,5 +129,4 @@ void Camera::MouseButtonCallback(GLFWwindow* window , int button , int action , 
 void Camera::ScrollCallback(GLFWwindow* window , double xoffset , double yoffset){
 
 	transform.Position.z += (float)yoffset;
-
 }

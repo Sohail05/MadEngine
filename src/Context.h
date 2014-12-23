@@ -2,9 +2,11 @@
 #define CONTEXT_H
 
 #include <Awesomium/WebCore.h>
-//#include <Awesomium/BitmapSurface.h>
+//Todo: Remove BitmaSurface Implementation
+#include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
-#include <iostream>
+
+//Todo: Create one definition location for GLFW stuff
 #ifdef _WIN32
 #define GLFW_EXPOSE_NATIVE_WIN32
 #define GLFW_EXPOSE_NATIVE_WGL
@@ -20,11 +22,10 @@
 #include <GLFW/glfw3native.h>
 
 
-//Run .Bat file or Python server 
-//#define   URL "http://127.0.0.1:8000/web/index.html"
-
-#define   URL "file:///C:/Users/Sohail/Desktop/Web/index.html"
-
+//Run .Bat file (Python server)
+//For path simplicity
+//Todo: set the relative path of the binary
+#define   URL "http://127.0.0.1:8000/web/index.html"
 
 using namespace Awesomium;
 
@@ -53,7 +54,7 @@ private:
 class EditorContext : Context {
 
 public:
-	TestFactory testfac;
+
 	GLFWwindow* window;
 	WebCore* web_core;
 	WebView* view;

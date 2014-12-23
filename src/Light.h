@@ -6,6 +6,8 @@
 #include <glm\glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+//Todo: implement proper Shader before working more on the light
+
 enum /* class only available in c++ 11*/ LightMode
 {
 	point = 0,
@@ -34,22 +36,17 @@ public:
 
 	}
 
-
-
 	void Update(){
 
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(Position));
 
 	}
+
+	//Move Enable function class ? unless lights needs their own
 	void Enable(){
 	}
 	void Disable(){
 	}
-
-
-
-
-
 
 };
 

@@ -1,6 +1,8 @@
 #ifndef MADCORE_H
 #define MADCORE_H
 
+//Clean Up all uncessesary includes
+
 /*
 
 #ifdef __APPLE__
@@ -15,6 +17,10 @@
 #ifdef _WIN32
 #include <Windows.h>
 #endif
+
+//Todo: Figure something out for Defines
+#define MAD_VERSION "0.X"
+
 
 #ifdef _WIN32
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -31,11 +37,12 @@
 #include <GLFW/glfw3native.h>
 
 #include <Awesomium/WebCore.h>
-//#include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
 
 #include <iostream>
 #include <cmath>
+
+//Todo: order and remove redundant includes
 
 #include "Transform.h"
 #include "Component.h"
@@ -57,7 +64,7 @@ int MadInit(){
 	if(!glfwInit() ){
 
 		printf("Failed to initate GLFW");
-		//return 1;
+		return 1;
 	}
 
 	GLFWwindow* window;
@@ -70,12 +77,10 @@ int MadInit(){
 	if (GLEW_OK != err)
 	{
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-		//return 1;
+		return 1;
 	}
 
-	//Spalsh Screen Perhaps ???
-	//Sleep(1000);
-
+	//Todo: Implement Spasl Screen 
 	GetMadInfo();
 
 	glfwDestroyWindow(window);
@@ -83,12 +88,9 @@ int MadInit(){
 	return 0;
 }
 
-
-
 void MadTerminate(){
 
 	glfwTerminate();
-
 
 }
 
@@ -98,10 +100,10 @@ void GetMadInfo(){
 	// get version info
 	const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
 	const GLubyte* version = glGetString (GL_VERSION); // version as a string
-	printf ("Renderer: %s\n", renderer);
-	printf ("OpenGL version supported %s\n", version);
+	printf("Renderer: %s\n", renderer);
+	printf("OpenGL version supported %s\n", version);
 	printf("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-	printf("MadEngine 0.X\n");
+	printf("MadEngine Version : %s", MAD_VERSION );
 }
 
 

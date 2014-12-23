@@ -13,11 +13,9 @@ public:
 		vec3 Rotation;
 		vec3 Scale;
 
-		//glm::vec3 myRotationAxis( ??, ??, ??);
-		//glm::rotate( angle_in_degrees, myRotationAxis );
+		//Todo : Implement Transform functions  
+		//glm::rotate( Degree, Rotation );
 
-
-		//glm::mat4 myScalingMatrix = glm::scale(2.0f, 2.0f ,2.0f);
 private:
 
 };
