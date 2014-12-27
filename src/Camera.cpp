@@ -30,6 +30,13 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 		case GLFW_KEY_U:
 
 
+			EditorContext* C = (EditorContext*)Context::MainContext;
+
+			if(C->view != NULL){
+				WebURL url(WSLit(URL));
+				C->view->LoadURL(url);
+			}
+		
 			break;
 
 	}
