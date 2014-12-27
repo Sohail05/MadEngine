@@ -13,9 +13,6 @@ MadSurface::MadSurface(int width, int height) : texture_id_(0),
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-		GLfloat largest_supported_anisotropy;
-		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest_supported_anisotropy);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest_supported_anisotropy);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0,bpp_ == 3 ? GL_RGB : GL_BGRA, GL_UNSIGNED_BYTE, buffer_);
 }
 

@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-void Camera::keycallback(GLFWwindow* window , int key , int scancode , int action , int mods  ){
+void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int action , int mods  ){
 
 	if(action == GLFW_PRESS)
 		switch( key ){
@@ -29,7 +29,7 @@ void Camera::keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 		case GLFW_KEY_U:
 
-			
+
 			break;
 
 	}
@@ -53,7 +53,7 @@ void Camera::keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 }
 
-void Camera::cursorcallback(GLFWwindow* window , double xpos , double ypos){
+void Camera::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 
 	if(Pan == true){
 
@@ -97,7 +97,12 @@ void Camera::cursorcallback(GLFWwindow* window , double xpos , double ypos){
 
 	}
 
+	EditorContext* C = (EditorContext*)Context::MainContext;
 
+	if(C->view != NULL){
+
+		C->view->InjectMouseMove( (int)xpos , (int)ypos );
+	}
 
 
 }
@@ -124,9 +129,49 @@ void Camera::MouseButtonCallback(GLFWwindow* window , int button , int action , 
 
 	}
 
+	EditorContext* C = (EditorContext*)Context::MainContext;
+
+	if(C->view != NULL){
+
+
+		if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS ){
+			C->view->InjectMouseDown(Awesomium::kMouseButton_Left);
+		}
+		if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE ){
+			C->view->InjectMouseUp(Awesomium::kMouseButton_Left);
+		}
+		if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS ){
+			C->view->InjectMouseDown(Awesomium::kMouseButton_Right);
+		}
+		if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE ){
+			C->view->InjectMouseUp(Awesomium::kMouseButton_Right);
+		}
+
+
+	}
+
 }
 
 void Camera::ScrollCallback(GLFWwindow* window , double xoffset , double yoffset){
 
 	transform.Position.z += (float)yoffset;
+
+	EditorContext* C = (EditorContext*)Context::MainContext;
+
+	if(C->view != NULL){
+
+		C->view->InjectMouseWheel( (int)yoffset , (int)xoffset);
+	}
+}
+
+void Camera::ResizeCallback(GLFWwindow* window , int width , int height){
+
+	EditorContext* C = (EditorContext*)Context::MainContext;
+
+	if(C->view != NULL){
+
+		C->view->Resize(width, height);
+
+	}
+
 }

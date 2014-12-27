@@ -19,12 +19,11 @@ std::string LoadFile( char* Filepath ){
 		InputFile.close();
 
 	}else{
-	
+
 		cout  << "cannot open or file not found: " << Filepath;
 		return NULL;
 	}
 
-	cout << Text;
 
 	return Text;
 }

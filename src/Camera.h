@@ -91,11 +91,11 @@ public:
 	}
 
 
-	virtual void keycallback(GLFWwindow *window,int key,int scancode,int action,int mods);
-	virtual void cursorcallback(GLFWwindow* window , double xpos , double ypos);
+	virtual void Keycallback(GLFWwindow *window,int key,int scancode,int action,int mods);
+	virtual void Cursorcallback(GLFWwindow* window , double xpos , double ypos);
 	virtual void MouseButtonCallback(GLFWwindow* window , int button , int action , int mods );
 	virtual void ScrollCallback(GLFWwindow* window , double xoffset , double yoffset);
-
+	virtual void ResizeCallback(GLFWwindow* window , int width , int height);
 
 	void Viewport(){
 

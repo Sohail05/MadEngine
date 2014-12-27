@@ -2,7 +2,7 @@
 
 Input* Input::MainInputHandler;
 
-void Control::keycallback(GLFWwindow *window, int key,int scancode,int action,int mods)
+void Control::Keycallback(GLFWwindow *window, int key,int scancode,int action,int mods)
 {
 	std::cout << "Keycallback\n";
 
@@ -18,7 +18,7 @@ void Control::keycallback(GLFWwindow *window, int key,int scancode,int action,in
 
 }
 
-void Control::cursorcallback(GLFWwindow* window , double xpos , double ypos){
+void Control::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 	std::cout << xpos << " - " << ypos; 
 }
 
@@ -30,4 +30,9 @@ void Control::MouseButtonCallback(GLFWwindow* window , int button , int action ,
 
 void Control::ScrollCallback(GLFWwindow* window , double xoffset , double yoffset){
 	std::cout << "Offset: " << xoffset << " - " << yoffset;
+}
+
+void Control::ResizeCallback(GLFWwindow* window , int width , int height ){
+
+	std::cout << "Width: " << width << " Height: " << height;
 }

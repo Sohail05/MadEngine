@@ -52,6 +52,9 @@ public:
 
 	void Compile(){
 
+		//Shader Debugging code from http://www.opengl-tutorial.org/
+		//WTFPL Public 
+
 		GLint Result = GL_FALSE;
 		int InfoLogLength;
 
@@ -82,8 +85,6 @@ public:
 			glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
 			printf("\n%s\n", &FragmentShaderErrorMessage[0]);
 		}
-
-
 
 
 		shaderProgram = glCreateProgram();

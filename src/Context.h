@@ -26,7 +26,8 @@
 //For path simplicity
 //Todo: set the relative path of the binary
 //#define   URL "http://127.0.0.1:8000/web/index.html"
-#define URL "file:///C:/Repositories/madengine/MadEngine/web/MadEngine.html"
+//#define URL "file:///C:/Repositories/madengine/MadEngine/web/MadEngine.html"
+#define URL "file:///C:/Users/Sohail/Desktop/Artifex/Artifex%20website/Web/index.html"
 using namespace Awesomium;
 
 class Context{
