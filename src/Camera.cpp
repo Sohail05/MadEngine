@@ -29,7 +29,7 @@ void Camera::keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 		case GLFW_KEY_U:
 
-			Context::MainContext->NeedUpdate = true;
+			
 			break;
 
 	}
@@ -67,19 +67,19 @@ void Camera::cursorcallback(GLFWwindow* window , double xpos , double ypos){
 		lastY = ypos;
 	}
 
-/* splited them into OrbitX and OrbitY
+	/* splited them into OrbitX and OrbitY
 	if(rotateControl == 1 ){
 
-		float deltaX = (float)(xpos - lastX) ;
-		float deltaY = (float)(ypos - lastY);
+	float deltaX = (float)(xpos - lastX) ;
+	float deltaY = (float)(ypos - lastY);
 
-		transform.Rotation.x +=  0.1f * deltaY;
-		transform.Rotation.y +=  0.1f * deltaX;
+	transform.Rotation.x +=  0.1f * deltaY;
+	transform.Rotation.y +=  0.1f * deltaX;
 
-		lastX = xpos;
-		lastY = ypos;
+	lastX = xpos;
+	lastY = ypos;
 	}
-*/
+	*/
 
 	if(OrbitX == true ){
 

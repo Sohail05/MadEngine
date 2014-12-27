@@ -27,7 +27,8 @@ public:
 	Mesh(){
 
 		Enable();
-		shader = Shader();
+		//shader = Shader();
+		shader = Shader("C:/Repositories/madengine/MadEngine/bin/default.vertex" , "C:/Repositories/madengine/MadEngine/bin/default.fragment"  );
 
 
 	}

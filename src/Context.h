@@ -19,13 +19,14 @@
 #include <gl\glew.h>
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
-
+#include "Surface.h"
+#include "Shader.h"
 
 //Run .Bat file (Python server)
 //For path simplicity
 //Todo: set the relative path of the binary
-#define   URL "http://127.0.0.1:8000/web/index.html"
-
+//#define   URL "http://127.0.0.1:8000/web/index.html"
+#define URL "file:///C:/Repositories/madengine/MadEngine/web/MadEngine.html"
 using namespace Awesomium;
 
 class Context{
@@ -36,7 +37,7 @@ public:
 	GLFWwindow* window;
 	WebCore* web_core;
 	WebView* view;
-	bool NeedUpdate;
+
 	static Context *MainContext;
 
 	virtual void Update() = 0;
@@ -57,6 +58,8 @@ public:
 	GLFWwindow* window;
 	WebCore* web_core;
 	WebView* view;
+	MadSurface* surface;
+	Shader SurfaceShader;
 
 	EditorContext();
 	EditorContext(int width , int height, char* title);

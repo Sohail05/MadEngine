@@ -11,11 +11,8 @@ EditorContext::EditorContext(){
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
-	//view = web_core->CreateWebView(300, 900, 0, kWebViewType_Window);// //kWebViewType_Offscreen
-	view = web_core->CreateWebView(300, 900, 0, kWebViewType_Offscreen);
-	//view->set_parent_window( glfwGetWin32Window(window) );
+	view = web_core->CreateWebView(500, 500, 0, kWebViewType_Offscreen);
 
-	//Load WebPage/Interface
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
 
@@ -27,29 +24,53 @@ EditorContext::EditorContext(int width , int height, char* title){
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
+	
+	MadSurfaceFactory* Factory = new MadSurfaceFactory(); 
+	web_core->set_surface_factory((SurfaceFactory*)Factory);
 
-	//view = web_core->CreateWebView(300, 900, 0, kWebViewType_Window); //kWebViewType_Offscreen
 	view = web_core->CreateWebView(width, height, 0, kWebViewType_Offscreen);
 	view->SetTransparent(true);
 
-/* For Onscreen view
-#ifdef __linux__  
-	view->set_parent_window( glfwGetX11Window(window) );
-#endif
+	surface = (MadSurface*)view->surface();
 
-#ifdef _WIN32  
-	//view->set_parent_window( glfwGetWin32Window(window) );
-#endif
-*/
-
-
-	//Load WebPage/Interface
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
+
 
 }
 
 void EditorContext::Update(){
+
+	glEnable( GL_TEXTURE_2D );
+
+	if( surface!= NULL){
+
+		glBindTexture(GL_TEXTURE_2D, surface->GetTexture());
+	}else{
+	
+		surface = (MadSurface*)view->surface();
+	}
+
+	glColor3f(1.0f,1.0f,1.0f);
+	int width=10, height=10;
+
+	//glfwGetWindowSize(window , &width , &height);
+
+	//glViewport(0,0,width,height);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glOrtho(0,1,0,1,0,10);
+	//glMatrixMode(GL_MODELVIEW);
+
+	
+	glBegin(GL_QUADS);
+      glTexCoord2f(0,1);glVertex3f(0, 0, 0.0f);
+      glTexCoord2f(1,1);glVertex3f((GLfloat)width, 0, 0.0f);
+      glTexCoord2f(1,0);glVertex3f((GLfloat)width, (GLfloat)height, 0.0f);
+      glTexCoord2f(0,0);glVertex3f(0, (GLfloat)height, 0.0f);
+	glEnd();
+
+	glDisable( GL_TEXTURE_2D );
 
 	web_core->Update();
 	glfwSwapBuffers(window);
