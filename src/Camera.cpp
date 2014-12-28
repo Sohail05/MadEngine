@@ -42,7 +42,6 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 	}
 
 
-
 	if( key == GLFW_KEY_KP_SUBTRACT && action == GLFW_PRESS ){
 
 	}
