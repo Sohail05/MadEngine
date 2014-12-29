@@ -2,6 +2,28 @@
 
 GLuint textureID;
 
+void ChangeColor(WebView* caller, const JSArray& args);
+
+Scene scene;
+
+void ChangeColor(WebView* caller, const JSArray& args){
+
+
+	//sece.color.SetColor(args[0].ToInteger(),args[1].ToInteger(),args[2].ToInteger(),1);
+	cout << "ColorChange\n";
+
+}
+
+void SetScene(WebView* caller, const JSArray& args){
+
+	scene.Axis = args[0].ToBoolean();
+	scene.Grid = args[1].ToBoolean();
+	//sece.color.SetColor(args[0].ToInteger(),args[1].ToInteger(),args[2].ToInteger(),1);
+	cout << "Axis - Grid\n";
+
+}
+
+
 int main(){
 
 	MadInit();
@@ -12,7 +34,7 @@ int main(){
 	context.SetActive();
 
 	//Create a Scene that Holds Entities and environment
-	Scene scene;
+	//Scene scene;
 	Control control(context.window);
 	Camera cam(context.window);
 
@@ -43,6 +65,13 @@ int main(){
 	scene.AddEntity(MyObj1);
 	scene.AddEntity(MyObj2);
 
+	EditorContext* C = (EditorContext*)Context::MainContext;
+	JSValue result = C->view->CreateGlobalJavascriptObject(WSLit("app"));
+	JSObject& app_object = result.ToObject();
+	delegator deler(app_object);
+
+	deler.customBind( app_object , WSLit("SetScene") , &SetScene );
+	C->view->set_js_method_handler(&deler);
 
 	while( !Context::MainContext->ShouldClose() ){
 

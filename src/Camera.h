@@ -102,6 +102,7 @@ public:
 		//Todo: Set Aspect Ratio to a public member
 		int width , height;
 		glfwGetWindowSize(window , &width , &height);
+
 		aspectratio = width / (float)height ;
 
 		glEnable(GL_DEPTH_TEST);

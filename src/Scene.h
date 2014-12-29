@@ -12,11 +12,25 @@ public:
 
 	//Todo: Implement A Skybox :D
 
+	bool Axis;
+	bool Grid;
+
+
+	Scene(){
+
+		Axis = true;
+		Grid = true;
+
+	}
+
+
 	void Update(){
 
+		if(Axis)
 		DrawAxis();
+		if(Grid)
 		DrawGrid();
-		
+
 
 		for(std::size_t i = 0 ; i < Entities.size() ; i++ ){
 			Entities.at(i).Update();
@@ -33,30 +47,39 @@ public:
 		Entities.push_back( E );
 	}
 
+
+	Entity3D* CreateEntity(){
+
+		Entity3D E = Entity3D();
+		Entities.push_back( E );
+
+		return &E;
+	}
+
 	/*
 	void DrawAxisCude(){
 
 
-		//int width = 1800, height = 900;
+	//int width = 1800, height = 900;
 
-		//glfwGetWindowSize( win , &width , &height);
-		//float aspectratio = width / (float)height ;
+	//glfwGetWindowSize( win , &width , &height);
+	//float aspectratio = width / (float)height ;
 
-		//glViewport( width - 200 ,  height - 200 , 200 , 200);
+	//glViewport( width - 200 ,  height - 200 , 200 , 200);
 
 
-		Mesh Cube;
-		Cube = GenerateCube();
+	Mesh Cube;
+	Cube = GenerateCube();
 
-		Transform transform;
+	Transform transform;
 
-		Component* c = (Component*)&Cube;
+	Component* c = (Component*)&Cube;
 
-		c->transform = &transform;
+	c->transform = &transform;
 
-		Cube.Draw();
+	Cube.Draw();
 
-		glEnd();
+	glEnd();
 
 
 	}

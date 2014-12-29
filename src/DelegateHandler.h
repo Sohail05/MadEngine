@@ -1,5 +1,4 @@
 #include <Awesomium/WebCore.h>
-#include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
 
 #include "js_delegate.h"
@@ -23,10 +22,9 @@ class delegator : public Awesomium::JSMethodHandler{
 public:
 
 
-	delegator(){};
+	delegator(){}
 
 	delegator(JSObject& app_object){
-
 
 
 	}

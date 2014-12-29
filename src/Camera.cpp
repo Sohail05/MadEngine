@@ -1,6 +1,9 @@
 #include "Camera.h"
+#include "binding.h"
 
 void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int action , int mods  ){
+
+	GLFW_to_Awesomium(window ,  key ,  scancode ,  action ,  mods);
 
 	if(action == GLFW_PRESS)
 		switch( key ){
