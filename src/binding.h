@@ -3,7 +3,6 @@
 #include "Context.h"
 #include <ctype.h>
 
-
 using namespace Awesomium;
 
 void GLFW_to_Awesomium(GLFWwindow* window , int key , int scancode , int action , int mods  ){
@@ -23,7 +22,6 @@ void GLFW_to_Awesomium(GLFWwindow* window , int key , int scancode , int action 
 	if(key == 259){
 
 		if(C != NULL && C->view != NULL){
-
 			WebKey.type = WebKeyboardEvent::kTypeKeyDown;
 			WebKey.virtual_key_code = '\b';
 			C->view->InjectKeyboardEvent(WebKey);

@@ -7,14 +7,15 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class Entity3D {
 
 public:
 
-
-	std::string Name;
+	string Name;
 	Transform transform;
-	std::vector<Component*> Components;
+	vector<Component*> Components;
 
 	void Update(){
 

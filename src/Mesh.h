@@ -6,6 +6,18 @@
 #include <vector>
 #include "Shader.h"
 #include "Color.h"
+#include <math.h>
+
+
+enum RenderMode{
+
+	Triangle = GL_TRIANGLES,
+	Point = GL_POINTS,
+	Line = GL_LINES,
+	Quad = GL_QUADS
+};
+
+
 
 class Mesh : Component{
 
@@ -22,7 +34,7 @@ public:
 	//If I leave it in each mesh will have it's own color with a shared shader
 	//but all objects using the same Shader can't all sync with the same color EX: Duplicate Objects
 	Color color;
-	int Mode;
+	RenderMode Mode;
 
 	Mesh(){
 
@@ -91,75 +103,176 @@ public:
 
 
 
-Mesh GenerateCube(){
-
-
-	Mesh M;
-	M.Mode = GL_QUADS;
-
-	M.Vertex.push_back(-1.0);	  M.Vertex.push_back(-1.0);		M.Vertex.push_back(-1.0);
-	M.Vertex.push_back( 1.0);	  M.Vertex.push_back(-1.0);		M.Vertex.push_back(-1.0);
-	M.Vertex.push_back(-1.0);	  M.Vertex.push_back( 1.0);		M.Vertex.push_back(-1.0);
-	M.Vertex.push_back( 1.0);	  M.Vertex.push_back( 1.0);		M.Vertex.push_back(-1.0);
-
-
-	M.Vertex.push_back(-1.0);	  M.Vertex.push_back(-1.0);		M.Vertex.push_back( 1.0);
-	M.Vertex.push_back( 1.0);	  M.Vertex.push_back(-1.0);		M.Vertex.push_back( 1.0);
-	M.Vertex.push_back(-1.0);	  M.Vertex.push_back( 1.0);		M.Vertex.push_back( 1.0);
-	M.Vertex.push_back( 1.0);	  M.Vertex.push_back( 1.0);		M.Vertex.push_back( 1.0);
-
-
-	M.Indices.push_back( 0);	  M.Indices.push_back( 1 );		M.Indices.push_back( 3 );  M.Indices.push_back( 2 );
-	M.Indices.push_back( 4);	  M.Indices.push_back( 5 );		M.Indices.push_back( 7 );  M.Indices.push_back( 6 );
-	M.Indices.push_back( 0);	  M.Indices.push_back( 1 );		M.Indices.push_back( 5 );  M.Indices.push_back( 4 );
-	M.Indices.push_back( 2);	  M.Indices.push_back( 3 );		M.Indices.push_back( 7 );  M.Indices.push_back( 6 );
-	M.Indices.push_back( 1);	  M.Indices.push_back( 3 );		M.Indices.push_back( 7 );  M.Indices.push_back( 5 );
-	M.Indices.push_back( 0);	  M.Indices.push_back( 2 );		M.Indices.push_back( 6 );  M.Indices.push_back( 4 );
-
-	return M;
-}
-
-
-Mesh GenerateTetra(){
-
+Mesh GenerateTetrahedron(float size){
 
 	Mesh M;
 
-	M.Mode = GL_LINES;
+	M.Mode = RenderMode::Triangle;
+	GLfloat a = size / 2.0f;
 
 	GLfloat vertices[] = {
 
-		1,1,1,
-		1,-1,-1,
-		-1,1,-1,
-		-1,-1,1
+		a, a, a, //0
+		a,-a,-a, //1
+		-a, a,-a, //2
+		-a,-a, a  //3
+	};
+
+	GLubyte indices[] = {
+
+		0,  2,  1,
+		2,  3,  1,
+		0,  1,  3,
+		0,  3,  2
 	};
 
 	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
 	M.Vertex = v;
 
-	//(1,1,1), (1,−1,−1), (−1,1,−1), (−1,−1,1)
+	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
+	M.Indices = i;
 
+	return M;
+}
 
-	// 8 of vertex coords
-	// 24 indices
-	GLubyte indices[] = {
+Mesh GenerateOctahedron(float size){
 
-		0,1,
-		0,2,
-		0,3,
-		1,2,
-		1,3,
-		2,3
+	Mesh M;
+
+	M.Mode = RenderMode::Triangle;
+	GLfloat a = size / ( 2.0f * sqrtf(2.0f) ) ;
+	GLfloat b = size / 2.0f;
+
+	GLfloat vertices[] = {
+
+		a, 0, a, //0
+		a, 0,-a, //1
+		-a, 0, a, //2
+		-a, 0,-a, //3
+		0, b, 0, //4
+		0,-b, 0 //5
 	};
 
+	GLubyte indices[] = {
 
+		2, 3, 4,
+		3, 2, 4,
+		1, 0, 4,
+		0, 2, 4,
+		1, 3, 5,
+		3, 2, 5,
+		0, 1, 5,
+		2, 0, 5
+	};
+
+	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
+	M.Vertex = v;
 
 	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
 	M.Indices = i;
 
+	return M;
+}
+
+
+Mesh GenerateHexahedron(float size){
+
+	Mesh M;
+
+	M.Mode = RenderMode::Quad;
+	GLfloat a = size / 2.0f ;
+
+	GLfloat vertices[] = {
+
+		a, a, a, //0
+		a, a,-a, //1
+		a,-a, a, //2
+		a,-a,-a, //3
+		-a, a, a, //4
+		-a, a,-a, //5
+		-a,-a, a, //6
+		-a,-a,-a //7
+	};
+
+	GLubyte indices[] = {
+
+		7, 3, 2, 6,
+		7, 6, 4, 5,
+		6, 2, 0, 4,
+		5, 4, 0, 1,
+		3, 1, 0, 2,
+		7, 5, 1, 3
+
+	};
+
+	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
+	M.Vertex = v;
+
+	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
+	M.Indices = i;
 
 	return M;
 }
+
+Mesh GenerateIcosahedron(float size){
+
+	Mesh M;
+
+	M.Mode = RenderMode::Triangle;
+	GLfloat a = size / 2.0f ;
+	GLfloat b = size / (2.0f * ( (1.0f + sqrtf(5.0f)) / 2.0f) ) ;
+
+	GLfloat vertices[] = {
+
+		0, b, a, //0
+		0, b,-a, //1
+		0,-b, a, //2
+		0,-b,-a, //3
+		b, a, 0, //4
+		b,-a, 0, //5
+		-b, a, 0, //6
+		-b,-a, 0, //7
+		a, 0, b, //8
+		a, 0,-b, //9
+		-a, 0, b, //10
+		-a, 0,-b  //11
+
+
+	};
+
+	GLubyte indices[] = {
+
+		1, 4,  6,
+		0, 6,  4,
+		0, 2,  10,
+		0, 8,  2,
+		1, 3,  9,
+		1, 11, 3,
+		2, 5,  7,
+		3, 7,  5,
+		6, 10, 11,
+		7, 11, 10,
+		4, 9,  8,
+		5, 8,  9,
+		0, 10, 6,
+		0, 4,  8,
+		1, 6,  11,
+		1, 9,  4,
+		3, 11, 7,
+		3, 5,  9,
+		2, 7,  10,
+		2, 8,  5,
+
+	};
+
+	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
+	M.Vertex = v;
+
+	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
+	M.Indices = i;
+
+	return M;
+}
+
 
 #endif

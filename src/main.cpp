@@ -1,3 +1,4 @@
+#include <Windows.h>
 #include "MadCore.h"
 
 GLuint textureID;
@@ -41,10 +42,19 @@ int main(){
 	//Create Entities/Objects in 3d space 
 	Entity3D MyObj1;
 	Entity3D MyObj2;
+	Entity3D MyObj3;
+	Entity3D MyObj4;
+	Entity3D MyObj5;
 
 	//Declare Mesh Component & Generate Mesh data
-	Mesh Cube = GenerateCube();
-	Mesh tetra = GenerateTetra();
+	Mesh Cube = GenerateHexahedron(2.0f);
+	Mesh Tetra = GenerateTetrahedron(2.0f);
+	Mesh Octa = GenerateOctahedron(2.0f);
+	Mesh Icos = GenerateIcosahedron(2.0f);
+
+	Mesh load = Mesh();
+	load.Vertex = LoadObj("C:/Repositories/madengine/MadEngine/resources/TetraObject/MadEngineTetra.obj");
+	load.Mode = RenderMode::Point;
 
 	//Light Component
 	Light light;
@@ -52,18 +62,30 @@ int main(){
 	//Set Color
 	Cube.color.SetColor(0,1,0,1);
 
-
 	MyObj1.AddComponent( (Component*)&Cube );
 	MyObj1.AddComponent( (Component*)&light );
-
-	MyObj2.AddComponent( (Component*)&tetra );
-
 	//Move Entities
 	MyObj1.transform.Position.x = 5.0f;
+
+	MyObj2.AddComponent( (Component*)&Tetra );
+	MyObj2.transform.Position.x = -5.0f;
+
+	MyObj3.AddComponent( (Component*)&Octa );
+	MyObj3.transform.Position.y = -5.0f;
+	
+	MyObj4.AddComponent( (Component*)&Icos );
+	MyObj4.transform.Position.y = 5.0f;
+
+	MyObj5.AddComponent( (Component*)&load );
+	MyObj5.transform.Position.z = -5.0f;
+
 
 	//Add them to the scene
 	scene.AddEntity(MyObj1);
 	scene.AddEntity(MyObj2);
+	scene.AddEntity(MyObj3);
+	scene.AddEntity(MyObj4);
+	scene.AddEntity(MyObj5);
 
 	EditorContext* C = (EditorContext*)Context::MainContext;
 	JSValue result = C->view->CreateGlobalJavascriptObject(WSLit("app"));

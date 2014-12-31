@@ -55,35 +55,24 @@ void EditorContext::Update(){
 
 	glColor3f(1.0f,1.0f,1.0f);
 
-	//int width=10, height=10;
-
-	//glfwGetWindowSize(window , &width , &height);
-	//view->Resize(width , height);
-
-	//glViewport(0,0,width,height);
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	//glOrtho(0,1,0,1,0,10);
-	//glMatrixMode(GL_MODELVIEW);
-
-	//Found this snippet of code on http://blog.yuwang-cg.com/
-	//Works like a charm ...this saves me a load of headaches until I implement a full shader approch
-	
 	glMatrixMode (GL_MODELVIEW);
-	glPushMatrix ();
-	glLoadIdentity ();
+	glPushMatrix();
+	glLoadIdentity();
 	glMatrixMode (GL_PROJECTION);
-	glPushMatrix ();
-	glLoadIdentity ();
-	glBegin (GL_QUADS);
+	glPushMatrix();
+	glLoadIdentity();
+
+
+	glBegin(GL_QUADS);
 	glTexCoord2f(0,1);glVertex3i (-1, -1, -1);
 	glTexCoord2f(1,1);glVertex3i (1, -1, -1);
 	glTexCoord2f(1,0);glVertex3i (1, 1, -1);
 	glTexCoord2f(0,0);glVertex3i (-1, 1, -1);
-	glEnd ();
-	glPopMatrix ();
+	glEnd();
+
+	glPopMatrix();
 	glMatrixMode (GL_MODELVIEW);
-	glPopMatrix ();
+	glPopMatrix();
 	
 
 	/*
