@@ -5,7 +5,6 @@
 #include "Input.h"
 #include "Transform.h"
 
-
 /**********
 References:
 
@@ -43,7 +42,7 @@ public:
 	ViewMode CameraViewMode;
 	Transform transform;
 
-	float zoom;
+	float zoom_factor;
 
 	double fovy;
 	double aspectratio;
@@ -55,29 +54,27 @@ public:
 	double lastY;
 
 	//Rotation Controls
-	bool Roll;		//Not implemented
-	bool Yaw;		//Not implemented
-	bool Pitch;		//Not implemented
+	bool roll;		//Not implemented
+	bool yaw;		//Not implemented
+	bool pitch;		//Not implemented
 
-	bool OrbitX;
-	bool OrbitY;
+	bool orbit_x;
+	bool orbit_y;
 
 	//Position Controls
-	bool Pan;
-
-
-	bool Zoom;
+	bool pan;
+	bool zoom;
 
 
 	Camera(GLFWwindow* win)
 	{
 		window = win;
-		zoom=5;
+		zoom_factor=5;
 
 		CameraViewMode = ViewMode::Perspective;
 
-		transform.Rotation = glm::vec3(30.0f , 0 , 0 );
-		transform.Position = glm::vec3(0.0f , 0.0f ,-25.0f);
+		transform.rotation = glm::vec3(30.0f , 0 , 0 );
+		transform.position = glm::vec3(0.0f , 0.0f ,-25.0f);
 
 		lastY=0;
 		lastX=0;
@@ -128,9 +125,9 @@ public:
 		glLoadIdentity();
 
 		//Todo: Implement with GLM here
-		glTranslatef(transform.Position.x , -transform.Position.y, transform.Position.z );
-		glRotatef( transform.Rotation.x , 1.0f , 0 , 0  );
-		glRotatef( transform.Rotation.y , 0 , 1.0f , 0  );
+		glTranslatef(transform.position.x , -transform.position.y, transform.position.z );
+		glRotatef( transform.rotation.x , 1.0f , 0 , 0  );
+		glRotatef( transform.rotation.y , 0 , 1.0f , 0  );
 
 	}
 

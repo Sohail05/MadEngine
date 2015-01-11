@@ -1,6 +1,8 @@
 #include "Surface.h"
 #include <iostream>
 
+//original code from Awesomium's Webflow demo
+
 MadSurface::MadSurface(int width, int height) : texture_id_(0),
 	buffer_(0), bpp_(4), rowspan_(0), width_(width), height_(height) {
 		rowspan_ = width_ * bpp_;

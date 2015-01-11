@@ -22,13 +22,11 @@
 
 //Run .Bat file (Python server)
 //For path simplicity
-//Todo: set the relative path of the binary
-//#define   URL "http://127.0.0.1:8000/web/index.html"
+//Todo: set the relative path of the binary & remove macro
 #define URL "http://127.0.0.1:8000/MadEngine.html"
 using namespace Awesomium;
 
 class Context{
-
 
 public:
 
@@ -45,9 +43,7 @@ public:
 
 private:
 
-
 };
-
 
 class EditorContext : Context {
 
@@ -57,7 +53,7 @@ public:
 	WebCore* web_core;
 	WebView* view;
 	MadSurface* surface;
-	Shader SurfaceShader;
+	Shader surface_shader;
 
 	EditorContext();
 	EditorContext(int width , int height, char* title);
@@ -67,15 +63,9 @@ public:
 	virtual void SetActive();
 	virtual int ShouldClose();
 
-
 private:
 
-
 };
-
-
-
-
 
 
 #endif

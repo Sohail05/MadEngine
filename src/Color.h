@@ -2,8 +2,7 @@
 #define COLOR_H
 
 /* Implement something like so:
-ex:
-Color NewColor = Color.Red;
+ex: Color NewColor = Color.Red;
 
 enum Colors
 {
@@ -26,6 +25,7 @@ class Color{
 
 public:
 
+	//Todo: chnage variable to lowercase
 	//Todo: figure out a General purpose approch with multiple format support
 	//Hex format 0x FF FF FF
 	//RGB 255 255 255

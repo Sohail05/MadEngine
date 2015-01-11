@@ -13,36 +13,27 @@ class Entity3D {
 
 public:
 
-	string Name;
+	string name;
 	Transform transform;
-	vector<Component*> Components;
+	vector<Component*> components;
 
 	void Update(){
 
-		for(std::size_t i = 0 ; i < Components.size() ; i++ ){
+		for(std::size_t i = 0 ; i < components.size() ; i++ ){
 
-			Components.at(i)->Update();
+			components.at(i)->Update();
 		}
 	}
-
 
 	//Todo: Implement a way to get component of type X
 	void AddComponent(Component* C){
 
 		C->transform = &transform ;
-		Components.push_back( C );
+		components.push_back( C );
 	}
-
-
 
 private:
 
-
 };
-
-
-
-
-
 
 #endif

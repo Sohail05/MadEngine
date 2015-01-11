@@ -11,10 +11,10 @@
 
 enum RenderMode{
 
-	Triangle = GL_TRIANGLES,
-	Point = GL_POINTS,
-	Line = GL_LINES,
-	Quad = GL_QUADS
+	TRIANGLE = GL_TRIANGLES,
+	POINT = GL_POINTS,
+	LINE = GL_LINES,
+	QUAD = GL_QUADS
 };
 
 
@@ -23,9 +23,9 @@ class Mesh : Component{
 
 public:
 
-	std::vector<GLfloat> Vertex;
+	std::vector<GLfloat> vertex;
 	//Todo: Need to get Triangle Data
-	std::vector<GLubyte> Indices;
+	std::vector<GLubyte> indices;
 
 	//Todo: Make Shaders Globaly accessble by all Mesh Components to avoid multiple same shader to be compiled
 	Shader shader;
@@ -47,7 +47,7 @@ public:
 
 	void Update(){
 
-		if(Active){
+		if(active){
 			Draw();
 		}
 
@@ -56,13 +56,13 @@ public:
 	//Todo: Move to Component Class
 	void Enable(){
 
-		Active = true;
+		active = true;
 
 	}
 	void Disable(){
 
 
-		Active = false;
+		active = false;
 	}
 
 
@@ -70,7 +70,7 @@ public:
 
 		// Activate Vertex Buffer
 		glEnableClientState( GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, 0, Vertex.data() );
+		glVertexPointer(3, GL_FLOAT, 0, vertex.data() );
 
 		//Use Shader
 		glUseProgram(shader.shaderProgram);
@@ -79,7 +79,7 @@ public:
 		//Design:  Should only need to do this once
 
 		GLuint PositionID = glGetUniformLocation(shader.shaderProgram, "Position");
-		glUniform3fv(PositionID, 1, glm::value_ptr(transform->Position) );
+		glUniform3fv(PositionID, 1, glm::value_ptr(transform->position) );
 
 		GLuint ColorID = glGetUniformLocation(shader.shaderProgram, "color");
 		//Ugly: is there a cleaner way ? 
@@ -88,7 +88,7 @@ public:
 		//Draw Mesh with Indices
 		//Design: Should Thing about implementing VBOs in a VAB 
 		//TTA: Should I also Generate a buffer and leave the vertices in there ?
-		glDrawElements(Mode, Indices.size() , GL_UNSIGNED_BYTE, Indices.data() );
+		glDrawElements(Mode, indices.size() , GL_UNSIGNED_BYTE, Indices.data() );
 
 		//Disable Shader
 		glUseProgram(0);
@@ -107,7 +107,7 @@ Mesh GenerateTetrahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::Triangle;
+	M.Mode = RenderMode::TRIANGLE;
 	GLfloat a = size / 2.0f;
 
 	GLfloat vertices[] = {
@@ -127,10 +127,10 @@ Mesh GenerateTetrahedron(float size){
 	};
 
 	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
-	M.Vertex = v;
+	M.vertex = v;
 
 	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
-	M.Indices = i;
+	M.indices = i;
 
 	return M;
 }
@@ -139,7 +139,7 @@ Mesh GenerateOctahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::Triangle;
+	M.Mode = RenderMode::TRIANGLE;
 	GLfloat a = size / ( 2.0f * sqrtf(2.0f) ) ;
 	GLfloat b = size / 2.0f;
 
@@ -166,10 +166,10 @@ Mesh GenerateOctahedron(float size){
 	};
 
 	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
-	M.Vertex = v;
+	M.vertex = v;
 
 	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
-	M.Indices = i;
+	M.indices = i;
 
 	return M;
 }
@@ -179,7 +179,7 @@ Mesh GenerateHexahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::Quad;
+	M.Mode = RenderMode::QUAD;
 	GLfloat a = size / 2.0f ;
 
 	GLfloat vertices[] = {
@@ -206,10 +206,10 @@ Mesh GenerateHexahedron(float size){
 	};
 
 	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
-	M.Vertex = v;
+	M.vertex = v;
 
 	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
-	M.Indices = i;
+	M.indices = i;
 
 	return M;
 }
@@ -218,7 +218,7 @@ Mesh GenerateIcosahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::Triangle;
+	M.Mode = RenderMode::TRIANGLE;
 	GLfloat a = size / 2.0f ;
 	GLfloat b = size / (2.0f * ( (1.0f + sqrtf(5.0f)) / 2.0f) ) ;
 
@@ -266,10 +266,10 @@ Mesh GenerateIcosahedron(float size){
 	};
 
 	std::vector<GLfloat> v( vertices , vertices + sizeof(vertices) / sizeof(vertices[0]) );
-	M.Vertex = v;
+	M.vertex = v;
 
 	std::vector<GLubyte> i( indices , indices + sizeof(indices) / sizeof(indices[0]) );
-	M.Indices = i;
+	M.indices = i;
 
 	return M;
 }

@@ -9,8 +9,8 @@
 class Component{
 public:
 
-	bool Active;
-
+	bool active;
+ 
 	Transform* transform;
 
 	virtual void Update()= 0 ;

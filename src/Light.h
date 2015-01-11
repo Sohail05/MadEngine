@@ -10,8 +10,8 @@
 
 enum /* class only available in c++ 11*/ LightMode
 {
-	point = 0,
-	directional = 1,
+	POINT = 0,
+	DIRECTIONAL = 1,
 
 };
 
@@ -19,26 +19,26 @@ enum /* class only available in c++ 11*/ LightMode
 class Light : Component {
 
 private:
-	LightMode LightType;
+	LightMode lightType;
 
 public:	
 
-	glm::vec3 Position;
+	glm::vec3 position;
 
 
 	Color color;
 
-	Light() : Position(0.0f , 2.0f , 0.0f ){
+	Light() : position(0.0f , 2.0f , 0.0f ){
 
 		color = Color( 255 , 255 , 255 , 1.0f );
-		LightType = point;
+	lightType = point;
 
 
 	}
 
 	void Update(){
 
-		glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(Position));
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(position));
 
 	}
 

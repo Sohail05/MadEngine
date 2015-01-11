@@ -53,8 +53,6 @@ private:
 
 };
 
-
-
 class Control : Input
 {
 public:
@@ -69,8 +67,6 @@ public:
 		glfwSetWindowSizeCallback( window , Input::ResizecallbackDispatch );
 	}
 
-
-
 	virtual void Keycallback(GLFWwindow *window,int key,int scancode,int action,int mods);
 	virtual void Cursorcallback(GLFWwindow* window , double xpos , double ypos);
 	virtual void MouseButtonCallback(GLFWwindow* window , int button , int action , int mods );
@@ -78,6 +74,5 @@ public:
 	virtual void ResizeCallback(GLFWwindow* window , int width , int height);
 
 };
-
 
 #endif

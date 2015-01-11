@@ -10,7 +10,6 @@
 
 using namespace Awesomium;
 
-
 typedef std::pair<int, Awesomium::WebString> ObjectMethodKey;
 typedef std::map<ObjectMethodKey, JSDelegate> BoundMethodMap;
 typedef std::map<ObjectMethodKey, JSDelegateWithRetval> BoundMethodWithRetvalMap;

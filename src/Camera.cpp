@@ -90,18 +90,18 @@ void Camera::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 	}
 	*/
 
-	if(OrbitX == true ){
+	if(orbit_y == true ){
 
 		float deltaX = (float)(xpos - lastX) ;
-		transform.Rotation.y +=  0.1f * deltaX;
+		transform.rotation.y +=  0.1f * deltaX;
 		lastX = xpos;
 
 	}
 
-	if(OrbitY == true ){
+	if(orbit_y == true ){
 
 		float deltaY = (float)(ypos - lastY) ;
-		transform.Rotation.x +=  0.1f * deltaY;
+		transform.rotation.x +=  0.1f * deltaY;
 		lastY = ypos;
 
 	}
@@ -119,22 +119,22 @@ void Camera::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 void Camera::MouseButtonCallback(GLFWwindow* window , int button , int action , int mods ){
 
 	if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS ){
-		Pan = true;
+		pan = true;
 		glfwGetCursorPos(window , &lastX , &lastY );
 	}
 
 	if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE ){
-		Pan = false;
+		pan = false;
 	}
 
 	if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS ){
-		OrbitX = true;
-		OrbitY = true;
+		orbitX = true;
+		orbitY = true;
 		glfwGetCursorPos(window , &lastX , &lastY );
 	}
 	if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE ){
-		OrbitX = false;
-		OrbitY = false;
+		orbitX = false;
+		orbitY = false;
 
 	}
 
@@ -163,7 +163,7 @@ void Camera::MouseButtonCallback(GLFWwindow* window , int button , int action , 
 
 void Camera::ScrollCallback(GLFWwindow* window , double xoffset , double yoffset){
 
-	transform.Position.z += (float)yoffset;
+	transform.position.z += (float)yoffset;
 
 	EditorContext* C = (EditorContext*)Context::MainContext;
 

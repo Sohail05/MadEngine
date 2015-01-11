@@ -17,8 +17,8 @@ void ChangeColor(WebView* caller, const JSArray& args){
 
 void SetScene(WebView* caller, const JSArray& args){
 
-	scene.Axis = args[0].ToBoolean();
-	scene.Grid = args[1].ToBoolean();
+	scene.axis = args[0].ToBoolean();
+	scene.grid = args[1].ToBoolean();
 	//sece.color.SetColor(args[0].ToInteger(),args[1].ToInteger(),args[2].ToInteger(),1);
 	cout << "Axis - Grid\n";
 
@@ -53,8 +53,8 @@ int main(){
 	Mesh Icos = GenerateIcosahedron(2.0f);
 
 	Mesh load = Mesh();
-	load.Vertex = LoadObj("C:/Repositories/madengine/MadEngine/resources/TetraObject/MadEngineTetra.obj");
-	load.Mode = RenderMode::Point;
+	load.vertex = LoadObj("C:/Repositories/madengine/MadEngine/resources/TetraObject/MadEngineTetra.obj");
+	load.Mode = RenderMode::POINT;
 
 	//Light Component
 	Light light;
@@ -65,19 +65,19 @@ int main(){
 	MyObj1.AddComponent( (Component*)&Cube );
 	MyObj1.AddComponent( (Component*)&light );
 	//Move Entities
-	MyObj1.transform.Position.x = 5.0f;
+	MyObj1.transform.position.x = 5.0f;
 
 	MyObj2.AddComponent( (Component*)&Tetra );
-	MyObj2.transform.Position.x = -5.0f;
+	MyObj2.transform.position.x = -5.0f;
 
 	MyObj3.AddComponent( (Component*)&Octa );
-	MyObj3.transform.Position.y = -5.0f;
+	MyObj3.transform.position.y = -5.0f;
 	
 	MyObj4.AddComponent( (Component*)&Icos );
-	MyObj4.transform.Position.y = 5.0f;
+	MyObj4.transform.position.y = 5.0f;
 
 	MyObj5.AddComponent( (Component*)&load );
-	MyObj5.transform.Position.z = -5.0f;
+	MyObj5.transform.position.z = -5.0f;
 
 
 	//Add them to the scene

@@ -12,23 +12,25 @@ public:
 
 	//Todo: Implement A Skybox :D
 
-	bool Axis;
-	bool Grid;
+	//Enable Axis Orientation Rendering
+	bool axis;
+	//Enable Grid Rendering
+	bool grid;
 
 
 	Scene(){
 
-		Axis = true;
-		Grid = true;
+		axis = true;
+		grid = true;
 
 	}
 
 
 	void Update(){
 
-		if(Axis)
+		if(axis)
 		DrawAxis();
-		if(Grid)
+		if(grid)
 		DrawGrid();
 
 

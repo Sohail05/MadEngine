@@ -4,22 +4,23 @@
 #include <Awesomium/Surface.h>
 #include <gl\glew.h>
 
+//original code from Awesomium's Webflow demo
+
 class MadSurface {
+
   GLuint texture_id_;
   unsigned char* buffer_;
   int bpp_, rowspan_, width_, height_;
   bool needs_update_;
 
  public:
+
   MadSurface(int width, int height);
   virtual ~MadSurface();
-
   GLuint GetTexture() const;
 
   int width() const { return width_; }
-
   int height() const { return height_; }
-
   int size() const { return rowspan_ * height_; }
 
  protected:

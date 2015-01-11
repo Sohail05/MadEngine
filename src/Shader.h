@@ -19,19 +19,19 @@ public:
 
 	std::string name;
 
-	std::string VertexShaderSource;
-	std::string FragmentShaderSource;
+	std::string vertex_shader_source;
+	std::string fragment_shaders_source;
 	GLuint shaderProgram;
 
 	Shader(){
 
-		VertexShaderSource = "#version 120\n"
+		vertex_shader_source = "#version 120\n"
 			"uniform vec3 Position;"
 			"void main () {"
 			" gl_Position = gl_ModelViewProjectionMatrix * (gl_Vertex + vec4( Position , 0 ))  ;"
 			"}";
 
-		FragmentShaderSource = "#version 120\n"
+		fragment_shaders_source = "#version 120\n"
 			"uniform vec4 color;"
 			"void main () {"
 			" gl_FragColor = color;"
@@ -43,8 +43,8 @@ public:
 	Shader(char* VS , char* FS ){
 
 
-		VertexShaderSource = LoadFile(VS);
-		FragmentShaderSource = LoadFile(FS);
+		vertex_shader_source = LoadFile(VS);
+		fragment_shaders_source = LoadFile(FS);
 
 		Compile();
 
@@ -59,7 +59,7 @@ public:
 		int InfoLogLength;
 
 		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		const char *v_str = VertexShaderSource.c_str();
+		const char *v_str = vertex_shader_source.c_str();
 		glShaderSource(vertexShader, 1, &v_str , NULL);
 		glCompileShader(vertexShader);
 
@@ -73,7 +73,7 @@ public:
 
 
 
-		const char *f_str = FragmentShaderSource.c_str();
+		const char *f_str = fragment_shaders_source.c_str();
 		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShader, 1, &f_str ,  NULL);
 		glCompileShader(fragmentShader);
