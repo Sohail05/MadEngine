@@ -24,8 +24,8 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 		case GLFW_KEY_R:
 
-			transform.Rotation = glm::vec3( 30 , 0 , 0  );
-			transform.Position = glm::vec3(0 , 0 , -25 );
+			transform.rotation = glm::vec3( 30 , 0 , 0  );
+			transform.position = glm::vec3(0 , 0 , -25 );
 			zoom = 10;
 			CameraViewMode = ViewMode::Perspective ;
 			break;
@@ -64,13 +64,13 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 void Camera::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 
-	if(Pan == true){
+	if(pan == true){
 
 		float deltaX = (float)(xpos - lastX);
 		float deltaY = (float)(ypos - lastY);
 
-		transform.Position.x +=  0.01f * deltaX;
-		transform.Position.y +=  0.01f * deltaY;
+		transform.position.x +=  0.01f * deltaX;
+		transform.position.y +=  0.01f * deltaY;
 
 		lastX = xpos;
 		lastY = ypos;
@@ -128,13 +128,13 @@ void Camera::MouseButtonCallback(GLFWwindow* window , int button , int action , 
 	}
 
 	if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS ){
-		orbitX = true;
-		orbitY = true;
+		orbit_x = true;
+		orbit_y = true;
 		glfwGetCursorPos(window , &lastX , &lastY );
 	}
 	if( button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE ){
-		orbitX = false;
-		orbitY = false;
+		orbit_x = false;
+		orbit_y = false;
 
 	}
 

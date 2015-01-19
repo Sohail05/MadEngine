@@ -1,5 +1,5 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef BINDING_H
+#define BINDING_H
 
 #include <Awesomium/WebCore.h>
 #include <GLFW\glfw3.h>

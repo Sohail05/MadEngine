@@ -54,7 +54,7 @@ int main(){
 
 	Mesh load = Mesh();
 	load.vertex = LoadObj("C:/Repositories/madengine/MadEngine/resources/TetraObject/MadEngineTetra.obj");
-	load.Mode = RenderMode::POINT;
+	load.Mode = RenderMode::kPoint;
 
 	//Light Component
 	Light light;

@@ -23,7 +23,7 @@
 //Run .Bat file (Python server)
 //For path simplicity
 //Todo: set the relative path of the binary & remove macro
-#define URL "http://127.0.0.1:8000/MadEngine.html"
+#define URL "file:///C:/Repositories/madengine/MadEngine/web/MadEngine.html"
 using namespace Awesomium;
 
 class Context{

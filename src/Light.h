@@ -10,8 +10,8 @@
 
 enum /* class only available in c++ 11*/ LightMode
 {
-	POINT = 0,
-	DIRECTIONAL = 1,
+	POINT_LIGHT = 0,
+	DIRECTIONAL_LIGHT = 1,
 
 };
 
@@ -31,7 +31,7 @@ public:
 	Light() : position(0.0f , 2.0f , 0.0f ){
 
 		color = Color( 255 , 255 , 255 , 1.0f );
-	lightType = point;
+		lightType = LightMode::POINT_LIGHT;
 
 
 	}

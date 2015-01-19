@@ -11,10 +11,10 @@
 
 enum RenderMode{
 
-	TRIANGLE = GL_TRIANGLES,
-	POINT = GL_POINTS,
-	LINE = GL_LINES,
-	QUAD = GL_QUADS
+	kTriangle = GL_TRIANGLES,
+	kPoint = GL_POINTS,
+	kLine = GL_LINES,
+	kQuad = GL_QUADS
 };
 
 
@@ -88,7 +88,7 @@ public:
 		//Draw Mesh with Indices
 		//Design: Should Thing about implementing VBOs in a VAB 
 		//TTA: Should I also Generate a buffer and leave the vertices in there ?
-		glDrawElements(Mode, indices.size() , GL_UNSIGNED_BYTE, Indices.data() );
+		glDrawElements(Mode, indices.size() , GL_UNSIGNED_BYTE, indices.data() );
 
 		//Disable Shader
 		glUseProgram(0);
@@ -107,7 +107,7 @@ Mesh GenerateTetrahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::TRIANGLE;
+	M.Mode = RenderMode::kTriangle;
 	GLfloat a = size / 2.0f;
 
 	GLfloat vertices[] = {
@@ -139,7 +139,7 @@ Mesh GenerateOctahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::TRIANGLE;
+	M.Mode = RenderMode::kTriangle;
 	GLfloat a = size / ( 2.0f * sqrtf(2.0f) ) ;
 	GLfloat b = size / 2.0f;
 
@@ -179,7 +179,7 @@ Mesh GenerateHexahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::QUAD;
+	M.Mode = RenderMode::kQuad;
 	GLfloat a = size / 2.0f ;
 
 	GLfloat vertices[] = {
@@ -218,7 +218,7 @@ Mesh GenerateIcosahedron(float size){
 
 	Mesh M;
 
-	M.Mode = RenderMode::TRIANGLE;
+	M.Mode = RenderMode::kTriangle;
 	GLfloat a = size / 2.0f ;
 	GLfloat b = size / (2.0f * ( (1.0f + sqrtf(5.0f)) / 2.0f) ) ;
 
