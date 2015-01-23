@@ -8,7 +8,6 @@
 #include "Color.h"
 #include <math.h>
 
-
 enum RenderMode{
 
 	kTriangle = GL_TRIANGLES,
@@ -16,8 +15,6 @@ enum RenderMode{
 	kLine = GL_LINES,
 	kQuad = GL_QUADS
 };
-
-
 
 class Mesh : Component{
 

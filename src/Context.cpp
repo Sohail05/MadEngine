@@ -3,24 +3,24 @@
 Context* Context::MainContext;
 
 //todo : Overload with the param version
-EditorContext::EditorContext(){
+EditorContext::EditorContext() : width_(500) , height_(500) , title_("New Context") {
 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
-	window = glfwCreateWindow( 500 , 500 , "New Context" , NULL , NULL );
+	window = glfwCreateWindow( width_ , height_ , title_ , NULL , NULL );
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
-	view = web_core->CreateWebView(500, 500, 0, kWebViewType_Offscreen);
+	view = web_core->CreateWebView(width_, height_, 0, kWebViewType_Offscreen);
 
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
 
 }
 
-EditorContext::EditorContext(int width , int height, char* title){
+EditorContext::EditorContext(int width , int height, char* title) : width_(width) , height_(height) , title_(title){
 
-	window = glfwCreateWindow( width , height , title , NULL , NULL );
+	window = glfwCreateWindow( width_ , height_ , title_ , NULL , NULL );
 	WebConfig config;
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
@@ -28,14 +28,13 @@ EditorContext::EditorContext(int width , int height, char* title){
 	MadSurfaceFactory* Factory = new MadSurfaceFactory(); 
 	web_core->set_surface_factory((SurfaceFactory*)Factory);
 
-	view = web_core->CreateWebView(width, height, 0, kWebViewType_Offscreen);
+	view = web_core->CreateWebView(width_, height_, 0, kWebViewType_Offscreen);
 	view->SetTransparent(true);
 
 	surface = (MadSurface*)view->surface();
 
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
-
 
 }
 

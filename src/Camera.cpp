@@ -39,7 +39,7 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 				WebURL url(WSLit(URL));
 				C->view->LoadURL(url);
 			}
-		
+
 			break;
 
 	}
@@ -114,13 +114,16 @@ void Camera::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 	}
 
 
+
 }
 
 void Camera::MouseButtonCallback(GLFWwindow* window , int button , int action , int mods ){
 
 	if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS ){
+
 		pan = true;
 		glfwGetCursorPos(window , &lastX , &lastY );
+
 	}
 
 	if( button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE ){

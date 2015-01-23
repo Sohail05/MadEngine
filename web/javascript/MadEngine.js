@@ -2,7 +2,6 @@ function Close(id){
 
    var find = "#"+id; 
 $(find).remove();
-
     
     console.debug(find);
 }
@@ -10,7 +9,6 @@ $(find).remove();
 
 function Min(id){
 
-    
    var find = document.getElementById(id); 
    var min;
    var context;
@@ -199,11 +197,33 @@ function Run(windowid, scriptid) {
     var F = new Function(functiondata);
 
     F();
-
-
 }
   
+  
+function AboutWindow(){
+
+	var window = document.getElementById(NewWindow());
+	AppendElement(window,"p","MadEngine 0.X By Sohail Ajmal");
+	
+}
+
+function AppendElement(window, tag, data ){
+
+	var element = document.createElement(tag);
+	element.innerHTML = data; 
+	
+	var content;
+    for (var i = 0; i < window.childNodes.length; i++) {
+
+        if (window.childNodes[i].className == "content") {
+            content = window.childNodes[i]; 
+        }
+
+    }
+	
+	content.appendChild(element);
     
+}
     
     
     

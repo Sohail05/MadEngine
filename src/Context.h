@@ -63,7 +63,14 @@ public:
 	virtual void SetActive();
 	virtual int ShouldClose();
 
+	int width() const { return width_; }
+	int height() const { return height_; }
+	char* title() const { return title_; }
+
 private:
+
+	int width_, height_;
+	char* title_;
 
 };
 

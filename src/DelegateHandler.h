@@ -65,6 +65,7 @@ public:
 	void Bind(Awesomium::JSObject& object,const Awesomium::WebString& name, JSDelegate callback){
 
 		// We can't bind methods to local JSObjects
+
 		if (object.type() == Awesomium::kJSObjectType_Local)
 			return;
 
