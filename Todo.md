@@ -7,6 +7,7 @@ Todo
  * Setup Instructions
  * Scene Data Structure
  * scene import/export
+ * Materials
  * Fully Implement Keyboard inputs
  * Entity/Component Editor
  * DirectX system

@@ -23,18 +23,11 @@ public:
 
 	delegator(){}
 
+	//Todo: there is no actual implementation/use !
 	delegator(JSObject& app_object){
 
 
 	}
-
-
-	void customBind( JSObject& app_object, WebString name , JSDelegate del ){
-
-		Bind(app_object, name, del);
-
-	}
-
 
 	void OnMethodCall(WebView* caller,unsigned int remote_object_id, const WebString& method_name,const Awesomium::JSArray& args) {
 		// Find the method that matches the object id + method name
@@ -65,9 +58,9 @@ public:
 	void Bind(Awesomium::JSObject& object,const Awesomium::WebString& name, JSDelegate callback){
 
 		// We can't bind methods to local JSObjects
-
-		if (object.type() == Awesomium::kJSObjectType_Local)
+		if (object.type() == Awesomium::kJSObjectType_Local){
 			return;
+		}
 
 		object.SetCustomMethod(name, false);
 

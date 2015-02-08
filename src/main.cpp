@@ -24,6 +24,13 @@ void SetScene(WebView* caller, const JSArray& args){
 
 }
 
+void GetSceneData(WebView* caller, const JSArray& args){
+
+
+
+}
+
+
 
 int main(){
 
@@ -87,13 +94,20 @@ int main(){
 	scene.AddEntity(MyObj4);
 	scene.AddEntity(MyObj5);
 
+	
 	EditorContext* C = (EditorContext*)Context::MainContext;
 	JSValue result = C->view->CreateGlobalJavascriptObject(WSLit("app"));
 	JSObject& app_object = result.ToObject();
-	delegator deler(app_object);
 
-	deler.customBind( app_object , WSLit("SetScene") , &SetScene );
+	//No difference
+	//delegator deler(app_object);
+
+	delegator deler(app_object);
+	deler.Bind( app_object , WSLit("SetScene") , &SetScene );
+	deler.Bind( app_object , WSLit("GetSceneData") , &GetSceneData );
 	C->view->set_js_method_handler(&deler);
+
+
 
 	while( !Context::MainContext->ShouldClose() ){
 
