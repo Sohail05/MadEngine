@@ -12,6 +12,7 @@ EditorContext::EditorContext() : width_(500) , height_(500) , title_("New Contex
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
 	view = web_core->CreateWebView(width_, height_, 0, kWebViewType_Offscreen);
+	view->Focus();
 
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
@@ -30,6 +31,7 @@ EditorContext::EditorContext(int width , int height, char* title) : width_(width
 
 	view = web_core->CreateWebView(width_, height_, 0, kWebViewType_Offscreen);
 	view->SetTransparent(true);
+	view->Focus();
 
 	surface = (MadSurface*)view->surface();
 
