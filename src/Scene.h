@@ -29,13 +29,14 @@ public:
 	void Update(){
 
 		if(axis)
-			DrawAxis();
+		DrawAxis();
 		if(grid)
-			DrawGrid();
+		DrawGrid();
 
 
 		for(std::size_t i = 0 ; i < Entities.size() ; i++ ){
 			Entities.at(i).Update();
+
 		}
 
 		//Optional: A small viewport or such with 3D Orientations displayed
@@ -44,6 +45,7 @@ public:
 	}
 
 	void AddEntity(Entity3D E){
+
 		Entities.push_back( E );
 	}
 
@@ -52,6 +54,7 @@ public:
 
 		Entity3D E = Entity3D();
 		Entities.push_back( E );
+
 		return &E;
 	}
 
