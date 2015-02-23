@@ -22,19 +22,9 @@
 #define MAD_VERSION "0.X"
 
 
-#ifdef _WIN32
-#define GLFW_EXPOSE_NATIVE_WIN32
-#define GLFW_EXPOSE_NATIVE_WGL
-#endif
-
-#ifdef __linux__
-#define GLFW_EXPOSE_NATIVE_X11
-#define GLFW_EXPOSE_NATIVE_GLX
-#endif
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/STLHelpers.h>

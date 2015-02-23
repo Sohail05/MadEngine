@@ -52,7 +52,8 @@ public:
 
 		Entity3D E = Entity3D();
 		Entities.push_back( E );
-		return &E;
+
+		return &Entities.back();
 	}
 
 	/*

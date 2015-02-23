@@ -16,7 +16,7 @@ enum RenderMode{
 	kQuad = GL_QUADS
 };
 
-class Mesh : Component{
+class Mesh :  public Component{
 
 public:
 
@@ -41,6 +41,9 @@ public:
 
 
 	}
+
+
+	~Mesh(){}
 
 	void Update(){
 
@@ -76,7 +79,7 @@ public:
 		//Design:  Should only need to do this once
 
 		GLuint PositionID = glGetUniformLocation(shader.shaderProgram, "Position");
-		glUniform3fv(PositionID, 1, glm::value_ptr(transform->position) );
+		glUniform3fv(PositionID, 1, glm::value_ptr(GetTransform()->position) );
 
 		GLuint ColorID = glGetUniformLocation(shader.shaderProgram, "color");
 		//Ugly: is there a cleaner way ? 
@@ -94,6 +97,8 @@ public:
 		glDisableClientState(GL_VERTEX_ARRAY);
 
 	}
+
+private:
 
 
 };

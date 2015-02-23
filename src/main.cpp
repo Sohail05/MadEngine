@@ -60,7 +60,7 @@ int main(){
 	Mesh Icos = GenerateIcosahedron(2.0f);
 
 	Mesh load = Mesh();
-	load.vertex = LoadObj("C:/Repositories/madengine/MadEngine/resources/TetraObject/MadEngineTetra.obj");
+	load.vertex = LoadObj("C:/Repositories/madengine/MadEngine/resources/TetraObject/MadEngineTetra.obj"); 
 	load.Mode = RenderMode::kPoint;
 
 	//Light Component

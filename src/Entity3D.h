@@ -17,21 +17,64 @@ public:
 	Transform transform;
 	vector<Component*> components;
 
-	void Update(){
+	Entity3D(){};
 
+	~Entity3D(){
+
+		components.clear();
+
+	}
+
+
+
+	void Update(){
 		for(std::size_t i = 0 ; i < components.size() ; i++ ){
 
 			components.at(i)->Update();
+
+
 		}
+
 	}
 
-	//Todo: Implement a way to get component of type X
+
 	void AddComponent(Component* C){
 
-		C->transform = &transform ;
+		C->SetTransform(&transform);
 		components.push_back( C );
+
 	}
 
+
+
+	/*
+
+	template <typename T>
+	T* AddComponent(){
+
+
+	T* C = new T();
+	C->SetTransform(&transform);
+	components.push_back( (Component*)C );
+
+	return (T*)&components.back();
+	}
+
+
+	template <typename T>
+	T* GetComponent(){
+
+	for(std::size_t i = 0 ; i < components.size() ; i++ ){
+
+	if( typeid( T ).name() == typeid( components.at(i)).name()  ){
+	return &components.at(i);
+	}
+	}
+
+	return;
+	}
+
+	*/
 private:
 
 };

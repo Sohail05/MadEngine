@@ -9,30 +9,26 @@ using namespace glm;
 class Transform
 {
 public:
-		vec3 position;
-		vec3 rotation;
-		vec3 scale;
-		mat4 matrix;
+	vec3 position;
+	vec3 rotation;
+	vec3 scale;
+	mat4 matrix;
 
-		//Todo : Implement Transform functions  
-		//glm::rotate( Degree, Rotation );
-		
-		Transform(){
-		
-			position = vec3(1);
-			rotation = vec3(1);
-			scale = vec3(1);
+	//Todo : Implement Transform functions  
+	//glm::rotate( Degree, Rotation );
 
-			UpdateMatrix();
-		}
+	Transform(): position(1), rotation(1), scale(1) {
+
+		UpdateMatrix();
+	}
 
 
-		void UpdateMatrix(){
-		
-		
-			//Matrix = mat4(Scale,Rotation,Position); 
-		
-		}
+	void UpdateMatrix(){
+
+
+		//Matrix = mat4(Scale,Rotation,Position); 
+
+	}
 
 
 

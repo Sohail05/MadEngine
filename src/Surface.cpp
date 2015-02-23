@@ -1,5 +1,4 @@
 #include "Surface.h"
-#include <iostream>
 
 //original code from Awesomium's Webflow demo
 

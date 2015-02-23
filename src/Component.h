@@ -10,14 +10,37 @@ class Component{
 public:
 
 	bool active;
- 
-	Transform* transform;
 
-	virtual void Update()= 0 ;
-	virtual void Enable()= 0 ;
-	virtual void Disable()= 0 ;
+
+	Component(){}
+	virtual ~Component(){}
+
+	virtual void Update()=0;
+	virtual void Enable()=0;
+	virtual void Disable()=0;
+
+
+
+	Transform* GetTransform(){
+
+		return transform_;
+	}
+
+	void SetTransform(Transform* transform){
+
+		transform_ = transform;
+	}
+
+	std::string GetType()
+	{
+		return typeid(*this).name() ;
+	}
+
 
 private:
+
+
+	Transform* transform_;
 
 };
 
