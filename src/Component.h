@@ -6,11 +6,13 @@
 //#1 Add Entity Pointer to Transform Class
 //#2 Add Entity Pointer to Component Class
 
+#include <string>
+#include "Transform.h"
+
 class Component{
 public:
 
 	bool active;
-
 
 	Component(){}
 	virtual ~Component(){}
@@ -19,26 +21,12 @@ public:
 	virtual void Enable()=0;
 	virtual void Disable()=0;
 
-
-
-	Transform* GetTransform(){
-
-		return transform_;
-	}
-
-	void SetTransform(Transform* transform){
-
-		transform_ = transform;
-	}
-
-	std::string GetType()
-	{
-		return typeid(*this).name() ;
-	}
-
+	Transform* GetTransform();
+	void SetTransform(Transform* transform);
+	std::string GetType();
+	
 
 private:
-
 
 	Transform* transform_;
 

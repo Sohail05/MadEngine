@@ -1,6 +1,9 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+
+// it's fine for now but This needs a lot of work!
+
 /* Implement something like so:
 ex: Color NewColor = Color.Red;
 
@@ -22,10 +25,10 @@ White	,
 
 class Color{
 
-
 public:
 
-	//Todo: chnage variable to lowercase
+
+	//Todo: change variable to lowercase
 	//Todo: figure out a General purpose approch with multiple format support
 	//Hex format 0x FF FF FF
 	//RGB 255 255 255
@@ -38,44 +41,15 @@ public:
 	float B;
 	float A;
 
+	//Default Contructor: everything at 1.0f
+	Color();
+
 	//int from 0 to 255
-	Color( int r , int g, int b , float a ){
+	Color( int r , int g, int b , float a );
 
-		R=(float)r/255.0f;
-		G=(float)r/255.0f;
-		B=(float)r/255.0f;
-		A=a;
+	Color( float r , float g, float b , float a );
 
-	}
-
-
-	Color( float r , float g, float b , float a ){
-
-		R=r;
-		G=g;
-		B=b;
-		A=a;
-
-	}
-
-
-	void SetColor( float r , float g, float b , float a ){
-
-		R=r;
-		G=g;
-		B=b;
-		A=a;
-
-	}
-
-	Color(){
-
-		R=1.0f;
-		G=1.0f;
-		B=1.0f;
-		A=1.0f;
-
-	}
+	void SetColor( float r , float g, float b , float a );
 
 
 

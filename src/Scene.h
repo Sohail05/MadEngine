@@ -43,11 +43,20 @@ public:
 
 	}
 
+
+	Entity3D& CreateEntity(){
+	
+		Entity3D E= Entity3D();
+		Entities.push_back( E );
+		
+		return Entities.back();
+	} 
+
 	void AddEntity(Entity3D E){
 		Entities.push_back( E );
 	}
 
-
+/*  LOL Deja-vu remove the pointer version once reference is proven to work
 	Entity3D* CreateEntity(){
 
 		Entity3D E = Entity3D();
@@ -55,6 +64,7 @@ public:
 
 		return &Entities.back();
 	}
+	*/
 
 	/*
 	void DrawAxisCude(){

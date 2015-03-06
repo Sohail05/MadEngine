@@ -21,17 +21,15 @@ public:
 
 	~Entity3D(){
 
-		components.clear();
+		//components.clear();
 
 	}
-
 
 
 	void Update(){
 		for(std::size_t i = 0 ; i < components.size() ; i++ ){
 
 			components.at(i)->Update();
-
 
 		}
 
@@ -43,6 +41,21 @@ public:
 		C->SetTransform(&transform);
 		components.push_back( C );
 
+	}
+
+
+	template <typename T>
+	T& AddComponent(){
+
+	T* C = new T();
+	C->SetTransform(&transform);
+	components.push_back( (Component*)C );
+
+	T* ref = (T*)(components.back());
+	
+	ref->color.SetColor(0,1,0,1);
+
+	return *ref;
 	}
 
 
