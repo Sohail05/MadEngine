@@ -2,8 +2,9 @@
 #define SCENE_H
 
 #include <vector>
-#include "Entity3D.h"
 #include "Context.h"
+#include "Entity3D.h"
+
 class Scene{
 
 public:
@@ -20,6 +21,7 @@ public:
 
 	Scene(){
 
+		CreateEntity();
 		axis = true;
 		grid = true;
 
@@ -35,7 +37,7 @@ public:
 
 
 		for(std::size_t i = 0 ; i < Entities.size() ; i++ ){
-			Entities.at(i).Update();
+			Entities[i].Update();
 		}
 
 		//Optional: A small viewport or such with 3D Orientations displayed
@@ -44,25 +46,25 @@ public:
 	}
 
 
-	Entity3D& CreateEntity(){
-	
+	Entity3D* CreateEntity(){
+
 		Entity3D E= Entity3D();
 		Entities.push_back( E );
-		
-		return Entities.back();
+
+		return &Entities.back();
 	} 
 
 	void AddEntity(Entity3D E){
 		Entities.push_back( E );
 	}
 
-/*  LOL Deja-vu remove the pointer version once reference is proven to work
+	/*  LOL Deja-vu remove the pointer version once reference is proven to work
 	Entity3D* CreateEntity(){
 
-		Entity3D E = Entity3D();
-		Entities.push_back( E );
+	Entity3D E = Entity3D();
+	Entities.push_back( E );
 
-		return &Entities.back();
+	return &Entities.back();
 	}
 	*/
 

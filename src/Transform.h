@@ -30,6 +30,11 @@ public:
 
 	}
 
+	vec3 GetPosition() const{
+	
+	return position;
+	}
+
 
 
 private:

@@ -20,12 +20,8 @@ Color::Color( float r , float g, float b , float a ){
 
 }
 
-Color::Color(){
+Color::Color():R(1.0f) , G(0.0f) , B(1.0f) , A(1.0f){
 
-	R=1.0f;
-	G=1.0f;
-	B=1.0f;
-	A=1.0f;
 
 }
 

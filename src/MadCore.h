@@ -3,6 +3,9 @@
 
 #define MAD_VERSION "0.X"
 
+#define _SECURE_SCL 0
+#define _HAS_ITERATOR_DEBUGGING 0
+
 #ifdef _WIN32
 #include <Windows.h>
 #endif
@@ -15,12 +18,11 @@ class MadCore{
 
 private:
 
-	Scene scene_;
 
 public:
 
-	MadCore(){};
-	~MadCore(){};
+	MadCore();
+	~MadCore();
 
 	int run();
 	int MadInit();
@@ -28,6 +30,7 @@ public:
 	void MadTerminate();
 	void GetMadInfo();
 
+	Scene scene_;
 
 };
 

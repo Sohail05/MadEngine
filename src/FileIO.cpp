@@ -47,7 +47,6 @@ std::vector<float> LoadObj( char* Filepath ){
 
 			if( Buffer.substr( 0 , 2 ) == "v " ){
 
-				std::string::size_type sz;
 				std::vector<std::string> vec = split(Buffer.substr(2 , Buffer.length() ) , ' ');
 				V.push_back( stof(vec.at(0), 0 ) );
 				V.push_back( stof(vec.at(1),0 ) );

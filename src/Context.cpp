@@ -2,22 +2,6 @@
 
 Context* Context::MainContext;
 
-//todo : Overload with the param version
-EditorContext::EditorContext() : width_(500) , height_(500) , title_("New Context") {
-
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
-
-	window = glfwCreateWindow( width_ , height_ , title_ , NULL , NULL );
-	WebConfig config;
-	config.remote_debugging_port = 9999;
-	web_core = WebCore::Initialize( config );
-	view = web_core->CreateWebView(width_, height_, 0, kWebViewType_Offscreen);
-	view->Focus();
-
-	WebURL url(WSLit(URL));
-	view->LoadURL(url);
-
-}
 
 EditorContext::EditorContext(int width , int height, char* title) : width_(width) , height_(height) , title_(title){
 
@@ -37,6 +21,12 @@ EditorContext::EditorContext(int width , int height, char* title) : width_(width
 
 	WebURL url(WSLit(URL));
 	view->LoadURL(url);
+
+}
+
+
+EditorContext::~EditorContext(){
+
 
 }
 
@@ -74,7 +64,7 @@ void EditorContext::Update(){
 	glPopMatrix();
 	glMatrixMode (GL_MODELVIEW);
 	glPopMatrix();
-	
+
 
 	/*
 	glBegin(GL_QUADS);

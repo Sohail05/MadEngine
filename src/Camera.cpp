@@ -26,7 +26,7 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 			transform.rotation = glm::vec3( 30 , 0 , 0  );
 			transform.position = glm::vec3(0 , 0 , -25 );
-			zoom = 10;
+			zoom = 1;
 			CameraViewMode = ViewMode::Perspective ;
 			break;
 

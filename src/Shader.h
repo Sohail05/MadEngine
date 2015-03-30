@@ -25,7 +25,7 @@ public:
 
 	Shader(){
 
-		vertex_shader_source = "#version 120\n"
+		vertex_shader_source = "#version 120 \n"
 			"uniform vec3 Position;"
 			"void main () {"
 			" gl_Position = gl_ModelViewProjectionMatrix * (gl_Vertex + vec4( Position , 0 ))  ;"
@@ -40,21 +40,21 @@ public:
 		Compile();
 	}
 
-	Shader(char* VS , char* FS ){
+	//Shader(char* VS , char* FS ){
 
 
-		vertex_shader_source = LoadFile(VS);
-		fragment_shaders_source = LoadFile(FS);
+	//	vertex_shader_source = LoadFile(VS);
+	//	fragment_shaders_source = LoadFile(FS);
 
-		Compile();
+	//	Compile();
 
-	}
+	//}
 
 	void Compile(){
 
 		//Shader Debugging code from http://www.opengl-tutorial.org/
 		//WTFPL Public 
-
+	
 		GLint Result = GL_FALSE;
 		int InfoLogLength;
 

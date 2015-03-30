@@ -4,19 +4,8 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/STLHelpers.h>
 
-//Todo: Create one definition location for GLFW stuff
-#ifdef _WIN32
-#define GLFW_EXPOSE_NATIVE_WIN32
-#define GLFW_EXPOSE_NATIVE_WGL
-#endif
-
-#ifdef __linux__
-#define GLFW_EXPOSE_NATIVE_X11
-#define GLFW_EXPOSE_NATIVE_GLX
-#endif
 #include <gl\glew.h>
 #include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>
 #include "Surface.h"
 #include "Shader.h"
 
@@ -55,8 +44,8 @@ public:
 	MadSurface* surface;
 	Shader surface_shader;
 
-	EditorContext();
 	EditorContext(int width , int height, char* title);
+	~EditorContext();
 
 	virtual void Update();
 	virtual void Terminate();

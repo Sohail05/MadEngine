@@ -1,14 +1,22 @@
 #include "Component.h"
+#include "Entity3D.h"
 
-Transform* Component::GetTransform(){
+Component::Component(Entity3D* parent){
 
-	return transform_;
+	parent_ = parent;
+
 }
 
-void Component::SetTransform(Transform* transform){
-
-	transform_ = transform;
+Component::~Component(){
 }
+
+
+Entity3D* Component::GetParent(){
+
+	return parent_;
+}
+
+
 
 std::string Component::GetType()
 {
