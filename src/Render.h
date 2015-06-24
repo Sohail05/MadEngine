@@ -11,6 +11,7 @@
 
 enum RenderMode{
 
+	kNone = 0,
 	kTriangle = GL_TRIANGLES,
 	kPoint = GL_POINTS,
 	kLine = GL_LINES,

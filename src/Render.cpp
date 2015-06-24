@@ -5,7 +5,7 @@ Render::Render(){
 
 	//shader = Shader("C:/Repositories/madengine/MadEngine/bin/default.vertex" , "C:/Repositories/madengine/MadEngine/bin/default.fragment"  );
 	shader = Shader();
-	Mode = RenderMode::kQuad;
+	Mode = RenderMode::kNone;
 }
 
 Render::~Render(){}
