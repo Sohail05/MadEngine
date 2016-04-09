@@ -19,14 +19,9 @@ public:
 
 	Entity3D* GetParent();
 	std::string GetType();
-	
 
 private:
-
 	Entity3D* parent_;
-
 };
-
-
 
 #endif

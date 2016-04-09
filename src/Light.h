@@ -15,40 +15,30 @@ enum /* class only available in c++ 11*/ LightMode
 
 };
 
-
 class Light : Component {
 
 private:
 	LightMode lightType;
 
-public:	
-
+public:
 	glm::vec3 position;
-
 
 	Color color;
 
 	Light(Entity3D* parent) : position(0.0f , 2.0f , 0.0f ) , Component(parent){
-	
 
 		color = Color( 255 , 255 , 255 , 1.0f );
 		lightType = LightMode::kPoint_Light;
-
-
 	}
 
 	void Update(){
-
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(position));
-
 	}
 
 	//Move Enable function class ? unless lights needs their own
-	void Enable(){
-	}
+	void Enable(){}
 
-	void Disable(){
-	}
+	void Disable(){}
 
 };
 

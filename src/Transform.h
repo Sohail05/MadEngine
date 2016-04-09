@@ -14,7 +14,7 @@ public:
 	vec3 scale;
 	mat4 matrix;
 
-	//Todo : Implement Transform functions  
+	//Todo : Implement Transform functions
 	//glm::rotate( Degree, Rotation );
 
 	Transform(): position(1), rotation(1), scale(1) {
@@ -22,20 +22,13 @@ public:
 		UpdateMatrix();
 	}
 
-
 	void UpdateMatrix(){
-
-
-		//Matrix = mat4(Scale,Rotation,Position); 
-
+		//Matrix = mat4(Scale,Rotation,Position);
 	}
 
 	vec3 GetPosition() const{
-	
-	return position;
+		return position;
 	}
-
-
 
 private:
 

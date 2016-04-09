@@ -32,7 +32,6 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 		case GLFW_KEY_U:
 
-
 			EditorContext* C = (EditorContext*)Context::MainContext;
 
 			if(C->view != NULL){
@@ -41,9 +40,7 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 			}
 
 			break;
-
 	}
-
 
 	if( key == GLFW_KEY_KP_SUBTRACT && action == GLFW_PRESS ){
 

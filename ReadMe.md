@@ -3,7 +3,6 @@ MadEngine WIP
 <img src="/resources/MadEngineIconFull.png" width="150">
 
 MadEngine is a experimental cross-platform graphic engine for prototyping, proof of concept and hacking written in C++.
-It works Windows and Linux (not tested on OSX).
 
 Build Requirements & Dependencing
 ------------------

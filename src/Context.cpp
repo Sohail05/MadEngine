@@ -2,7 +2,6 @@
 
 Context* Context::MainContext;
 
-
 EditorContext::EditorContext(int width , int height, char* title) : width_(width) , height_(height) , title_(title){
 
 	window = glfwCreateWindow( width_ , height_ , title_ , NULL , NULL );
@@ -10,7 +9,7 @@ EditorContext::EditorContext(int width , int height, char* title) : width_(width
 	config.remote_debugging_port = 9999;
 	web_core = WebCore::Initialize( config );
 
-	MadSurfaceFactory* Factory = new MadSurfaceFactory(); 
+	MadSurfaceFactory* Factory = new MadSurfaceFactory();
 	web_core->set_surface_factory((SurfaceFactory*)Factory);
 
 	view = web_core->CreateWebView(width_, height_, 0, kWebViewType_Offscreen);
@@ -25,10 +24,7 @@ EditorContext::EditorContext(int width , int height, char* title) : width_(width
 }
 
 
-EditorContext::~EditorContext(){
-
-
-}
+EditorContext::~EditorContext(){}
 
 void EditorContext::Update(){
 
@@ -53,7 +49,6 @@ void EditorContext::Update(){
 	glPushMatrix();
 	glLoadIdentity();
 
-
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,1);glVertex3i (-1, -1, -1);
 	glTexCoord2f(1,1);glVertex3i (1, -1, -1);
@@ -64,7 +59,6 @@ void EditorContext::Update(){
 	glPopMatrix();
 	glMatrixMode (GL_MODELVIEW);
 	glPopMatrix();
-
 
 	/*
 	glBegin(GL_QUADS);
@@ -94,13 +88,10 @@ void EditorContext::Terminate(){
 }
 
 void EditorContext::SetActive(){
-
 	MainContext = this;
 	glfwMakeContextCurrent(window);
-
 }
 
 int EditorContext::ShouldClose(){
-
 	return glfwWindowShouldClose(window);
 }

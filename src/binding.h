@@ -108,20 +108,20 @@ void GLFW_to_Awesomium(GLFWwindow* window , int key , int scancode , int action 
 	case GLFW_KEY_BACKSLASH     :
 	case GLFW_KEY_RIGHT_BRACKET :
 	case GLFW_KEY_GRAVE_ACCENT  :
-		//case GLFW_KEY_KP_0: 
-		//case GLFW_KEY_KP_1: 
-		//case GLFW_KEY_KP_2: 
-		//case GLFW_KEY_KP_3: 
-		//case GLFW_KEY_KP_4: 
-		//case GLFW_KEY_KP_5: 
-		//case GLFW_KEY_KP_6: 
-		//case GLFW_KEY_KP_7: 
-		//case GLFW_KEY_KP_8: 
+		//case GLFW_KEY_KP_0:
+		//case GLFW_KEY_KP_1:
+		//case GLFW_KEY_KP_2:
+		//case GLFW_KEY_KP_3:
+		//case GLFW_KEY_KP_4:
+		//case GLFW_KEY_KP_5:
+		//case GLFW_KEY_KP_6:
+		//case GLFW_KEY_KP_7:
+		//case GLFW_KEY_KP_8:
 		//case GLFW_KEY_KP_9:
-		//case GLFW_KEY_KP_DECIMAL :  
-		//case GLFW_KEY_KP_DIVIDE  : 
-		//case GLFW_KEY_KP_MULTIPLY:   
-		//case GLFW_KEY_KP_SUBTRACT:   
+		//case GLFW_KEY_KP_DECIMAL :
+		//case GLFW_KEY_KP_DIVIDE  :
+		//case GLFW_KEY_KP_MULTIPLY:
+		//case GLFW_KEY_KP_SUBTRACT:
 		//case GLFW_KEY_KP_ADD     :
 		//case GLFW_KEY_KP_ENTER   :
 		//case GLFW_KEY_KP_EQUAL   :

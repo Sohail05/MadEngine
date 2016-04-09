@@ -10,8 +10,6 @@
 
 using namespace std;
 
-
-
 class Entity3D {
 
 public:
@@ -28,11 +26,8 @@ public:
 	template <typename T>
 	T* AddComponent();
 
-
-
 private:
 
 };
-
 
 #endif

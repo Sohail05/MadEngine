@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-//Leave this until Offscreen view is properly implemented 
+//Leave this until Offscreen view is properly implemented
 
 using namespace Awesomium;
 
@@ -16,17 +16,12 @@ typedef std::map<ObjectMethodKey, JSDelegateWithRetval> BoundMethodWithRetvalMap
 BoundMethodMap bound_methods_;
 BoundMethodWithRetvalMap bound_methods_with_retval_;
 
-
 class delegator : public Awesomium::JSMethodHandler{
 public:
 
-
 	delegator(){}
-
 	//Todo: there is no actual implementation/use !
-	delegator(JSObject& app_object){
-
-
+		delegator(JSObject& app_object){
 	}
 
 	void OnMethodCall(WebView* caller,unsigned int remote_object_id, const WebString& method_name,const Awesomium::JSArray& args) {
@@ -100,27 +95,21 @@ WebViewWidth = args[0].ToInteger();
 
 }
 
-
-
 void ChangeColor(WebView* caller, const JSArray& args){
 
-
-R=args[0].ToInteger();
-G=args[1].ToInteger();
-B=args[2].ToInteger();
-
+	R=args[0].ToInteger();
+	G=args[1].ToInteger();
+	B=args[2].ToInteger();
 
 }
+
 glm::vec3 position;
 
 void SetPosition(WebView* caller, const JSArray& args){
 
-
 position.x= (float)args[0].ToInteger();
-position.y= (float)args[1].ToInteger();
 position.z= (float)args[2].ToInteger();
-
-
+position.y= (float)args[1].ToInteger();
 
 std::cout << "PositionSet :" << position.x;
 

@@ -1,35 +1,12 @@
 #include "Color.h"
 
 
-Color::Color( int r , int g, int b , float a ){
+//Todo: figure out a General purpose approch with multiple format support
+//Hex format 0x FF FF FF
+//RGB 255 255 255
+//RGBA 255 255 255 1
+//HSL
+//HSV
 
-	R=(float)r/255.0f;
-	G=(float)r/255.0f;
-	B=(float)r/255.0f;
-	A=a;
-
-}
-
-
-Color::Color( float r , float g, float b , float a ){
-
-	R=r;
-	G=g;
-	B=b;
-	A=a;
-
-}
-
-Color::Color():R(1.0f) , G(0.0f) , B(1.0f) , A(1.0f){
-
-
-}
-
-void Color::SetColor( float r , float g, float b , float a ){
-
-	R=r;
-	G=g;
-	B=b;
-	A=a;
-
-}
+Color::Color( float r , float g, float b , float a ) : _red(r), _green(g), _blue(b), _alpha(a)  {}
+Color::Color() : _red(1.0f), _green(0.0f), _blue(1.0f), _alpha(1.0f){}

@@ -8,3 +8,9 @@ Development Log
 due to its inactive support and outdated version of chromium.
 
 * Creating a openGL/vulkan based GUI system
+
+* Implement something like the following ```Color NewColor = Color::Red```
+
+* Clean up project
+
+* Abstract sub-systems and Class/Data structures 

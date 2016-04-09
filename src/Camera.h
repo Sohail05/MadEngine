@@ -47,7 +47,7 @@ public:
 	double fovy;
 	double aspectratio;
 	double zNear;
-	double zFar; 
+	double zFar;
 
 
 	double lastX;
@@ -55,7 +55,7 @@ public:
 
 	//Rotation Controls
 	bool roll;		//Not implemented
-	bool yaw;		//Not implemented
+	bool yaw;			//Not implemented
 	bool pitch;		//Not implemented
 
 	bool orbit_x;
@@ -81,12 +81,11 @@ public:
 
 		fovy = 45.0f;
 		zNear=1;
-		zFar=500; 
+		zFar=500;
 
 		SetMainInput();
 
 	}
-
 
 	virtual void Keycallback(GLFWwindow *window,int key,int scancode,int action,int mods);
 	virtual void Cursorcallback(GLFWwindow* window , double xpos , double ypos);

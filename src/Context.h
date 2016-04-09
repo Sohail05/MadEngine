@@ -12,7 +12,7 @@
 //Run .Bat file (Python server)
 //For path simplicity
 //Todo: set the relative path of the binary & remove macro
-#define URL "file:///C:/Repositories/madengine/MadEngine/web/MadEngine.html"
+#define URL "file:///" //Path the Interface files
 using namespace Awesomium;
 
 class Context{

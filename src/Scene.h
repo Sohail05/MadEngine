@@ -11,13 +11,11 @@ public:
 
 	std::vector<Entity3D> Entities;
 
-	//Todo: Implement A Skybox :D
-
+	//Todo: Implement A Skybox
 	//Enable Axis Orientation Rendering
 	bool axis;
 	//Enable Grid Rendering
 	bool grid;
-
 
 	Scene(){
 
@@ -52,7 +50,7 @@ public:
 		Entities.push_back( E );
 
 		return &Entities.back();
-	} 
+	}
 
 	void AddEntity(Entity3D E){
 		Entities.push_back( E );
@@ -104,20 +102,20 @@ public:
 
 		GLfloat vertices[] = {
 
-			0.0,  0.0,   0.0,	
-			10.0,  0.0,   0.0,  
-			0.0,  10.0,   0.0,  
-			0.0,  0.0,   10.0,  
+			0.0,  0.0,   0.0,
+			10.0,  0.0,   0.0,
+			0.0,  10.0,   0.0,
+			0.0,  0.0,   10.0,
 
 		};
 
 		GLubyte colors[] =
 		{
 
-			255,255,255, 
-			255,0,0,       
-			0,255,0,       
-			0,0,255,       
+			255,255,255,
+			255,0,0,
+			0,255,0,
+			0,0,255,
 
 		};
 

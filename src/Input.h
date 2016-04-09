@@ -21,7 +21,7 @@ public:
 	{
 		if(MainInputHandler)
 			MainInputHandler->Keycallback(window,key,scancode,action,mods);
-	} 
+	}
 
 	static void  CursorcallbackDispatch(GLFWwindow* window , double xpos , double ypos)
 	{
@@ -34,7 +34,7 @@ public:
 		if(MainInputHandler)
 			MainInputHandler->MouseButtonCallback(window,button,action,mods);
 
-	} 
+	}
 
 	static void  ScrollcallbackDispatch(GLFWwindow* window , double xoffset , double yoffset)
 	{
@@ -47,7 +47,7 @@ public:
 		if(MainInputHandler)
 			MainInputHandler->ResizeCallback(window,width,height);
 
-	} 
+	}
 
 private:
 
