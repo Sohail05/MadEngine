@@ -5,38 +5,18 @@
 #include "Input.h"
 #include "Transform.h"
 
-/**********
-References:
-
-Roll
-1	0	0
-0  cos -sin
-0  sin cos
-
-Pitch
-cos	0	sin
-0	1	0
--sin	0	cos
-
-Yaw
-cos	 -sin	0
-sin	  cos	0
-0	0	0
-*****/
-
-
 enum ViewMode{
 
-	Orthographic = 0,
-	Perspective = 1
-	//Todo: Add Panorama
-	//Todo: Add Fish Eye
+	kOrthographic = 0,
+	kPerspective = 1,
+	kPanorama = 2,
+	kFishEye = 3,
 
 };
 
 
 class Camera : Input {
-public:
+	public:
 
 	GLFWwindow* window;
 	ViewMode CameraViewMode;
@@ -71,7 +51,7 @@ public:
 		window = win;
 		zoom_factor=5;
 
-		CameraViewMode = ViewMode::Perspective;
+		CameraViewMode = ViewMode::kPerspective;
 
 		transform.rotation = glm::vec3(30.0f , 0 , 0 );
 		transform.position = glm::vec3(0.0f , 0.0f ,-25.0f);
@@ -110,7 +90,7 @@ public:
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 
-		if (CameraViewMode == ViewMode::Orthographic){
+		if (CameraViewMode == ViewMode::kOrthographic){
 
 			glOrtho(-aspectratio*zoom, aspectratio*zoom, -1.f*zoom, 1.f*zoom, 1.f, 500.f);
 			glMatrixMode(GL_MODELVIEW);

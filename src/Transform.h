@@ -1,37 +1,43 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <glm/glm.hpp>
-#include <glm/gtx/transform.hpp>
+#include "common\Vector.h"
+#include "common\Matrix.h"
 
-using namespace glm;
+using namespace MAD;
 
 class Transform
 {
-public:
-	vec3 position;
-	vec3 rotation;
-	vec3 scale;
-	mat4 matrix;
+	public:
+	
+		vec3<float> position;
+		vec3<float> rotation;
+		vec3<float> scale;
+		mat4x4<float> matrix;
+	
+		//Todo : Implement Transform functions
+		//glm::rotate( Degree, Rotation );
+	
+		Transform() : position(1.0f), rotation(1.0f), scale(1.0f) {
+			UpdateMatrix();
+		}
+	
+	
+		void translate(){};
+		void rotate(){};
 
-	//Todo : Implement Transform functions
-	//glm::rotate( Degree, Rotation );
 
-	Transform(): position(1), rotation(1), scale(1) {
 
-		UpdateMatrix();
-	}
-
-	void UpdateMatrix(){
-		//Matrix = mat4(Scale,Rotation,Position);
-	}
-
-	vec3 GetPosition() const{
-		return position;
-	}
-
-private:
-
+		void UpdateMatrix(){
+			//Matrix = mat4(Scale,Rotation,Position);
+		}
+	
+		vec3<float> GetPosition() const{
+			return position;
+		}
+	
+	private:
+	
 };
 
 

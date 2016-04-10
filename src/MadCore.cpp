@@ -1,19 +1,5 @@
 #include "MadCore.h"
-#include <iostream>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
-#include <Awesomium/WebCore.h>
-#include <Awesomium/STLHelpers.h>
-
-#include "Entity3D.h"
-#include "Component.h" // move components.h to entity or something ...
-#include "Light.h" // move this to component.h
-
-#include "Input.h"
-#include "Camera.h"  //Rewrite this class
-
-#include "Mesh.h"
 
 MadCore::MadCore() : scene_() {};
 MadCore::~MadCore(){};
@@ -91,5 +77,5 @@ void MadCore::GetMadInfo(){
 	printf("Renderer: %s\n", renderer);
 	printf("OpenGL version supported %s\n", version);
 	printf("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-	printf("MadEngine Version : %s", MAD_VERSION );
+	printf("MadEngine Version : %s", MADENGINE_VERSION );
 }

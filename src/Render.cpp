@@ -29,7 +29,7 @@ void Render::Draw(){
 
 	GLuint ColorID = glGetUniformLocation(shader.shaderProgram, "color");
 	//Ugly: is there a cleaner way ? 
-	glUniform4f(ColorID, color.R , color.G , color.B , color.A );
+	glUniform4f(ColorID, color.red , color.green , color.blue , color.alpha );
 
 	//Draw Mesh with Indices
 	//Design: Should Thing about implementing VBOs in a VAB 

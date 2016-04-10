@@ -15,10 +15,10 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 
 		case GLFW_KEY_F:
 
-			if( CameraViewMode == ViewMode::Orthographic ){
-				CameraViewMode = ViewMode::Perspective;
+			if( CameraViewMode == ViewMode::kOrthographic ){
+				CameraViewMode = ViewMode::kPerspective;
 			}else{
-				CameraViewMode = ViewMode::Orthographic;
+				CameraViewMode = ViewMode::kOrthographic;
 			}
 			break;
 
@@ -27,7 +27,7 @@ void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int actio
 			transform.rotation = glm::vec3( 30 , 0 , 0  );
 			transform.position = glm::vec3(0 , 0 , -25 );
 			zoom = 1;
-			CameraViewMode = ViewMode::Perspective ;
+			CameraViewMode = ViewMode::kPerspective ;
 			break;
 
 		case GLFW_KEY_U:
