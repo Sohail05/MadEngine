@@ -1,25 +1,25 @@
-#ifndef ENTITY3D_H
-#define ENTITY3D_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include "Transform.h"
 #include "Component.h"
 #include "Mesh.h"
 #include "Render.h"
+#include "common\String.h"
 #include <vector>
-#include <string>
 
-using namespace std;
+using namespace MAD;
 
-class Entity3D {
+class Entity {
 
 public:
 
-	string name;
+	String name;
 	Transform transform;
 	vector<Component*> components;
 
-	Entity3D();
-	~Entity3D();
+	Entity();
+	~Entity();
 
 	void Update();
 

@@ -34,6 +34,7 @@ MadEngine is licensed under the [MIT License](LICENSE).
 Todo
 ------------------
 
+ * Implement Splash Screen
  * ~~Create Cmake files~~
  * Improve cmake files
  * ~~ReadMe.md~~

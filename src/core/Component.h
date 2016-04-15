@@ -3,13 +3,13 @@
 
 #include <string>
 
-class Entity3D;
+class Entity;
 class Component{
 public:
 
 	bool active;
 
-	Component(Entity3D* parent);
+	Component(Entity* parent);
 	Component(){};
 	virtual ~Component();
 
@@ -17,11 +17,11 @@ public:
 	virtual void Enable()=0;
 	virtual void Disable()=0;
 
-	Entity3D* GetParent();
+	Entity* GetParent();
 	std::string GetType();
 
 private:
-	Entity3D* parent_;
+	Entity* parent_;
 };
 
 #endif

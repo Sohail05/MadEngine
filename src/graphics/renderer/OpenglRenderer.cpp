@@ -1,16 +1,16 @@
 #include "Render.h"
 #include "Mesh.h"
 
-Render::Render(){
+OpenglRenderer::OpenglRenderer(){
 
 	//shader = Shader("C:/Repositories/madengine/MadEngine/bin/default.vertex" , "C:/Repositories/madengine/MadEngine/bin/default.fragment"  );
 	shader = Shader();
 	Mode = RenderMode::kNone;
 }
 
-Render::~Render(){}
+OpenglRenderer::~OpenglRenderer(){}
 
-void Render::Draw(){
+void OpenglRenderer::Draw(){
 
 
 	// Activate Vertex Buffer
@@ -28,11 +28,11 @@ void Render::Draw(){
 	glUniform3fv(PositionID, 1, Vec3);
 
 	GLuint ColorID = glGetUniformLocation(shader.shaderProgram, "color");
-	//Ugly: is there a cleaner way ? 
+	//Ugly: is there a cleaner way ?
 	glUniform4f(ColorID, color.red , color.green , color.blue , color.alpha );
 
 	//Draw Mesh with Indices
-	//Design: Should Thing about implementing VBOs in a VAB 
+	//Design: Should Thing about implementing VBOs in a VAB
 	//TTA: Should I also Generate a buffer and leave the vertices in there ?
 	glDrawElements(Mode, indices.size() , GL_UNSIGNED_BYTE, indices.data() );
 

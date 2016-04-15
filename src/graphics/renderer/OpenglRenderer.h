@@ -1,5 +1,5 @@
-#ifndef Render_H
-#define Render_H
+#ifndef OPENGLRENDERER_H
+#define OPENGLRENDERER_H
 
 #include <gl\glew.h>
 #include <glm/glm.hpp>
@@ -18,16 +18,9 @@ enum RenderMode{
 	kQuad = GL_QUADS
 };
 
-class Render {
+class OpenglRenderer : public Render {
 
 public:
-
-	std::vector<GLfloat> vertex;
-	//Todo: Need to get Triangle Data
-	std::vector<GLubyte> indices;
-
-	//Todo: Make Shaders Globaly accessble by all Mesh Components to avoid multiple same shader to be compiled
-	Shader shader;
 
 	//Design TTA: Does Mesh really need a color?
 	//If I leave it in each mesh will have it's own color with a shared shader
@@ -35,11 +28,10 @@ public:
 	Color color;
 	RenderMode Mode;
 
-	Render();
-	~Render();
+	OpenglRenderer();
+	~OpenglRenderer();
 
 	void Draw();
-
 
 private:
 

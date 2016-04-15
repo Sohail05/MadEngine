@@ -1,13 +1,13 @@
 #include "Component.h"
-#include "Entity3D.h"
+#include "Entity.h"
 
-Component::Component(Entity3D* parent){
+Component::Component(Entity* parent){
 	parent_ = parent;
 }
 
 Component::~Component(){}
 
-Entity3D* Component::GetParent(){
+Entity* Component::GetParent(){
 	return parent_;
 }
 

@@ -1,9 +1,10 @@
-#include "Entity3D.h"
+#include "Entity.h"
 #include "Component.h"
+#include "Light.h" // move this to component.h
 
-Entity3D::Entity3D() : name("New Entity") {};
+Entity::Entity() : name("New Entity") {};
 
-Entity3D::~Entity3D(){
+Entity::~Entity(){
 
 	for(std::size_t i = 0;  i  > components.size() ; i++ ){
 		delete components[i];
@@ -11,7 +12,7 @@ Entity3D::~Entity3D(){
 	components.clear();
 }
 
-void Entity3D::Update(){
+void Entity::Update(){
 	for(std::size_t i = 0 ; i < components.size() ; i++ ){
 		Component* C =  components[i];
 		if(C != NULL){
@@ -21,7 +22,7 @@ void Entity3D::Update(){
 }
 
 template <typename T>
-T* Entity3D::AddComponent(){
+T* Entity::AddComponent(){
 	T* NewComponent = new T();
 	components.push_back( (Component*)NewComponent );
 	return NewComponent;

@@ -1,9 +1,9 @@
-#include "MadCore.h"
+#include "Core/MadCore.h"
 
 int main(){
 
 	MadCore app;
-	app.run();
+	app.Run();
 
 	return 0;
 }

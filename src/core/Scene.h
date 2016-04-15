@@ -3,13 +3,13 @@
 
 #include <vector>
 #include "Context.h"
-#include "Entity3D.h"
+#include "Entity.h"
 
 class Scene{
 
 public:
 
-	std::vector<Entity3D> Entities;
+	std::vector<Entity> Entities;
 
 	//Todo: Implement A Skybox
 	//Enable Axis Orientation Rendering
@@ -44,15 +44,15 @@ public:
 	}
 
 
-	Entity3D* CreateEntity(){
+	Entity* CreateEntity(){
 
-		Entity3D E= Entity3D();
+		Entity E= Entity();
 		Entities.push_back( E );
 
 		return &Entities.back();
 	}
 
-	void AddEntity(Entity3D E){
+	void AddEntity(Entity E){
 		Entities.push_back( E );
 	}
 

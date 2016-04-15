@@ -25,7 +25,7 @@ public:
 
 	Color color;
 
-	Light(Entity3D* parent) : position(0.0f , 2.0f , 0.0f ) , Component(parent){
+	Light(Entity* parent) : position(0.0f , 2.0f , 0.0f ) , Component(parent){
 
 		color = Color( 255 , 255 , 255 , 1.0f );
 		lightType = LightMode::kPoint_Light;
