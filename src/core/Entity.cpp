@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include "Component.h"
-#include "Light.h" // move this to component.h
+#include "../Graphics/Light.h" // move this to component.h
 
 Entity::Entity() : name("New Entity") {};
 

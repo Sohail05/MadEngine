@@ -1,8 +1,9 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include <iostream>
+#include <gl/glew.h>
 #include <GLFW\glfw3.h>
+#include "Context.h"
 
 class Input{
 public:
@@ -17,36 +18,33 @@ public:
 
 	virtual void SetMainInput() { MainInputHandler = this; }
 
-	static void  KeycallbackDispatch(GLFWwindow *window,int key,int scancode,int action,int mods)
-	{
-		if(MainInputHandler)
+	static void  KeycallbackDispatch(GLFWwindow *window,int key,int scancode,int action,int mods){
+		if(MainInputHandler){
 			MainInputHandler->Keycallback(window,key,scancode,action,mods);
+		}
 	}
 
-	static void  CursorcallbackDispatch(GLFWwindow* window , double xpos , double ypos)
-	{
-		if(MainInputHandler)
+	static void  CursorcallbackDispatch(GLFWwindow* window , double xpos , double ypos){
+		if(MainInputHandler){
 			MainInputHandler->Cursorcallback(window,xpos,ypos);
+		}
 	}
 
-	static void  MousebuttoncallbackDispatch(GLFWwindow* window , int button , int action , int mods )
-	{
-		if(MainInputHandler)
+	static void  MousebuttoncallbackDispatch(GLFWwindow* window , int button , int action , int mods ){
+		if(MainInputHandler){
 			MainInputHandler->MouseButtonCallback(window,button,action,mods);
-
+		}
 	}
 
-	static void  ScrollcallbackDispatch(GLFWwindow* window , double xoffset , double yoffset)
-	{
-		if(MainInputHandler)
+	static void  ScrollcallbackDispatch(GLFWwindow* window , double xoffset , double yoffset){
+		if(MainInputHandler){
 			MainInputHandler->ScrollCallback(window,xoffset,yoffset);
-
+		}
 	}
-	static void  ResizecallbackDispatch(GLFWwindow* window , int width , int height)
-	{
-		if(MainInputHandler)
+	static void  ResizecallbackDispatch(GLFWwindow* window , int width , int height){
+		if(MainInputHandler){
 			MainInputHandler->ResizeCallback(window,width,height);
-
+		}
 	}
 
 private:
@@ -58,7 +56,8 @@ class Control : Input
 public:
 
 	//Todo: Overload this with a Context class and have the construcstor get the view itself
-	Control(GLFWwindow* window){
+	Control(EditorContext context){
+		GLFWwindow* window = context.window;
 		SetMainInput();
 		glfwSetKeyCallback(window, Input::KeycallbackDispatch);
 		glfwSetCursorPosCallback( window , Input::CursorcallbackDispatch );

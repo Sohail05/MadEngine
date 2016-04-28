@@ -1,6 +1,5 @@
 #include "Camera.h"
-#include "binding.h"
-
+/*
 void Camera::Keycallback(GLFWwindow* window , int key , int scancode , int action , int mods  ){
 
 	GLFW_to_Awesomium(window ,  key ,  scancode ,  action ,  mods);
@@ -73,19 +72,7 @@ void Camera::Cursorcallback(GLFWwindow* window , double xpos , double ypos){
 		lastY = ypos;
 	}
 
-	/* splited them into OrbitX and OrbitY
-	if(rotateControl == 1 ){
 
-	float deltaX = (float)(xpos - lastX) ;
-	float deltaY = (float)(ypos - lastY);
-
-	transform.Rotation.x +=  0.1f * deltaY;
-	transform.Rotation.y +=  0.1f * deltaX;
-
-	lastX = xpos;
-	lastY = ypos;
-	}
-	*/
 
 	if(orbit_y == true ){
 
@@ -184,3 +171,5 @@ void Camera::ResizeCallback(GLFWwindow* window , int width , int height){
 	}
 
 }
+
+*/

@@ -2,7 +2,6 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include "common\String.h"
 #include <iostream>
 #include <fstream>
 
@@ -14,14 +13,13 @@ public:
 	~Debug() {};
 
 	template <class T>
-	void Console(T msg) {
-
+	static void Console(T msg) {
 		std::cout << msg;
 
 	}
 
 	template <class T>
-	void Log(T msg) {
+	static void Log(T msg) {
 
 		std::fstream file;
 		file.open("MadEngine.log", std::ios_base::app);
@@ -30,12 +28,7 @@ public:
 			file << msg << "\n";
 			file.close();
 		}
-
-
 	}
-
-
-
 
 };
 

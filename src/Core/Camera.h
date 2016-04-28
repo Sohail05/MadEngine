@@ -1,8 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "Context.h"
+#include <gl\glew.h>
+#include <GLFW\glfw3.h>
 #include "Input.h"
+
 #include "Transform.h"
 
 enum ViewMode{
@@ -15,7 +17,7 @@ enum ViewMode{
 };
 
 
-class Camera : Input {
+class Camera {
 	public:
 
 	GLFWwindow* window;
@@ -28,7 +30,6 @@ class Camera : Input {
 	double aspectratio;
 	double zNear;
 	double zFar;
-
 
 	double lastX;
 	double lastY;
@@ -46,9 +47,9 @@ class Camera : Input {
 	bool zoom;
 
 
-	Camera(GLFWwindow* win)
+	Camera(EditorContext context)
 	{
-		window = win;
+		GLFWwindow* window = context.window;
 		zoom_factor=5;
 
 		CameraViewMode = ViewMode::kPerspective;
@@ -63,15 +64,7 @@ class Camera : Input {
 		zNear=1;
 		zFar=500;
 
-		SetMainInput();
-
 	}
-
-	virtual void Keycallback(GLFWwindow *window,int key,int scancode,int action,int mods);
-	virtual void Cursorcallback(GLFWwindow* window , double xpos , double ypos);
-	virtual void MouseButtonCallback(GLFWwindow* window , int button , int action , int mods );
-	virtual void ScrollCallback(GLFWwindow* window , double xoffset , double yoffset);
-	virtual void ResizeCallback(GLFWwindow* window , int width , int height);
 
 	void Viewport(){
 

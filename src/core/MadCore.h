@@ -1,25 +1,31 @@
+#pragma once
 #ifndef MADCORE_H
 #define MADCORE_H
 
-#include "defines.h"
+
+#include <gl/glew.h>
+
+#include "Defines.h"
+#include <iostream>
+#include "Debug.h"
+#include "Context.h" 
+#include "Scene.h"
+#include "Camera.h"
+#include "Input.h"
 
 class MadCore{
-
-private:
 
 public:
 
 	MadCore();
 	~MadCore();
-
-	int Run();
 	int Init();
+	int Run();
 
 	void Terminate();
 	void GetInfo();
 
 	Scene scene_;
-	Debug debugger;
 };
 
 #endif

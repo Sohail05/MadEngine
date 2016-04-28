@@ -12,7 +12,6 @@
 
 namespace MAD
 {
-
 	typedef  std::string String;
 }
 

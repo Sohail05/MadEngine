@@ -10,45 +10,30 @@ class Scene{
 public:
 
 	std::vector<Entity> Entities;
-
-	//Todo: Implement A Skybox
-	//Enable Axis Orientation Rendering
-	bool axis;
-	//Enable Grid Rendering
-	bool grid;
+	bool axis; 		//Enable Axis Rendering
+	bool grid;		//Enable Grid Rendering
 
 	Scene(){
-
 		CreateEntity();
 		axis = true;
 		grid = true;
-
 	}
 
 
 	void Update(){
 
-		if(axis)
-			DrawAxis();
-		if(grid)
-			DrawGrid();
-
+		if(axis){DrawAxis();}
+		if(grid){DrawGrid();}
 
 		for(std::size_t i = 0 ; i < Entities.size() ; i++ ){
 			Entities[i].Update();
 		}
-
-		//Optional: A small viewport or such with 3D Orientations displayed
-		//DrawAxisCude();
-
 	}
 
 
 	Entity* CreateEntity(){
-
 		Entity E= Entity();
 		Entities.push_back( E );
-
 		return &Entities.back();
 	}
 
@@ -56,67 +41,24 @@ public:
 		Entities.push_back( E );
 	}
 
-	/*  LOL Deja-vu remove the pointer version once reference is proven to work
-	Entity3D* CreateEntity(){
-
-	Entity3D E = Entity3D();
-	Entities.push_back( E );
-
-	return &Entities.back();
-	}
-	*/
-
-	/*
-	void DrawAxisCude(){
-
-
-	//int width = 1800, height = 900;
-
-	//glfwGetWindowSize( win , &width , &height);
-	//float aspectratio = width / (float)height ;
-
-	//glViewport( width - 200 ,  height - 200 , 200 , 200);
-
-
-	Mesh Cube;
-	Cube = GenerateCube();
-
-	Transform transform;
-
-	Component* c = (Component*)&Cube;
-
-	c->transform = &transform;
-
-	Cube.Draw();
-
-	glEnd();
-
-
-	}
-	*/
-
 	void DrawAxis(){
 
 		glLineWidth( 5.0f );
 		glEnable(GL_LINE_SMOOTH);
 
 		GLfloat vertices[] = {
-
 			0.0,  0.0,   0.0,
 			10.0,  0.0,   0.0,
 			0.0,  10.0,   0.0,
 			0.0,  0.0,   10.0,
-
 		};
 
 		GLubyte colors[] =
 		{
-
 			255,255,255,
 			255,0,0,
 			0,255,0,
 			0,0,255,
-
 		};
 
 		// 8 of vertex coords
@@ -140,8 +82,6 @@ public:
 
 	}
 
-
-
 	void DrawGrid(){
 
 		glBegin(GL_LINES);
@@ -155,17 +95,9 @@ public:
 			glVertex3f(  -10.0f, 0, (float)i);
 			glVertex3f(   10.0f, 0, (float)i);
 
-			//glVertex3f(  i, -10,0);
-			// glVertex3f(  i, 10, 0);
-
-			//glVertex3f(  -10, i, 0);
-			//glVertex3f(   10, i, 0);
-
 		}
 		glEnd();
-
 	}
-
 
 };
 #endif

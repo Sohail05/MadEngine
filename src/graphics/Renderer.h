@@ -1,8 +1,9 @@
 #ifndef Render_H
 #define Render_H
 
-#include "Mesh.h"
-#include "Shader.h"
+#include "../Core/Mesh.h"
+#include "shader.h"
+#include "../Common/Color.h"
 
 enum RenderMode{
 	kNone = 0,
@@ -12,20 +13,19 @@ enum RenderMode{
 	kQuad = GL_QUADS
 };
 
-class Render {
+class Renderer {
 
 public:
 
+	Color color;
 	Mesh mesh;
 	Shader shader;
 	RenderMode Mode;
 
-	Render(){};
-	~Render(){};
-	//virtual Render(){} = 0;
-	//virtual ~Render(){} = 0;
+	Renderer();
+	~Renderer();
 
-	virtual Draw(){} = 0;
+	void Draw();
 
 private:
 

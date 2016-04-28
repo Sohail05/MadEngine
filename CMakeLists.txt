@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 project(MadEngine)
 
- file(GLOB_RECURSE sources src/*.cpp src/*.h)
+ #file(GLOB_RECURSE sources src/*.cpp src/*.h)
+ file(GLOB_RECURSE sources src/* )
+
  file(GLOB_RECURSE sources_test test/*.cpp)
  file(GLOB_RECURSE assets resources/*)
+
  ###############################################################################
  ## target definitions #########################################################
  ###############################################################################
@@ -11,36 +14,37 @@ project(MadEngine)
  # add the data to the target, so it becomes visible in some IDE
  add_executable(MadEngine ${sources} ${assets})
 
+
  # just for example add some compiler flags
  #target_compile_options(MadEngine PUBLIC)
 
  # this lets me include files relative to the root src dir with a <> pair
  target_include_directories(MadEngine PUBLIC src/)
-
  # this copies all resource files in the build directory
  # we need this, because we want to work with paths relative to the executable
- file(COPY ${assets} DESTINATION resources)
- file(COPY ${sources} DESTINATION src)
+ #file(COPY ${assets} DESTINATION resources)
+ #file(COPY ${sources} DESTINATION src)
+ #file(COPY src DESTINATION / )
 
  ###############################################################################
  ## dependencies ###############################################################
  ###############################################################################
 
  set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
- find_package(Awesomium REQUIRED)
+ #find_package(Awesomium REQUIRED)
  find_package(GLEW REQUIRED)
  find_package(GLFW REQUIRED)
  find_package(GLM REQUIRED)
 
- include_directories(MadEngine PUBLIC 
-	${AWESOMIUM_INCLUDE_DIR} 
-	${GLEW_INCLUDE_DIR} 
+ include_directories(MadEngine PUBLIC
+	#${AWESOMIUM_INCLUDE_DIR}
+	${GLEW_INCLUDE_DIR}
 	${GLFW_INCLUDE_DIR}
 	${GLM_INCLUDE_DIR}
  )
- 
- link_libraries(MadEngine PUBLIC 
-	${AWESOMIUM_LIBRARIES} 
+
+ link_libraries(MadEngine PUBLIC
+	#${AWESOMIUM_LIBRARIES}
 	${GLEW_LIBRARIES}
 	${GLFW_LIBRARIES}
  )
@@ -75,7 +79,7 @@ project(MadEngine)
  # target_include_directories(unit_tests PUBLIC
     # ${GTEST_INCLUDE_DIRS} # doesn't do anything on linux
   # )
- 
+
  # endif()
 
  # ###############################################################################
@@ -88,7 +92,7 @@ project(MadEngine)
  # # this is basically a repeat of the file copy instruction that copies the
  # # resources in the build directory, but here we tell cmake that we want it
  # # in the package
- 
+
  install(DIRECTORY resources DESTINATION Build)
 
  # # now comse everything we need, to create a package

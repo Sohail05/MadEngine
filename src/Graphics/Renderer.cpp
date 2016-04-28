@@ -1,21 +1,20 @@
-#include "Render.h"
-#include "Mesh.h"
+#include "Renderer.h"
+#include "../Core/Mesh.h"
 
-OpenglRenderer::OpenglRenderer(){
+Renderer::Renderer(){
 
 	//shader = Shader("C:/Repositories/madengine/MadEngine/bin/default.vertex" , "C:/Repositories/madengine/MadEngine/bin/default.fragment"  );
 	shader = Shader();
 	Mode = RenderMode::kNone;
 }
 
-OpenglRenderer::~OpenglRenderer(){}
+Renderer::~Renderer(){}
 
-void OpenglRenderer::Draw(){
-
+void Renderer::Draw(){
 
 	// Activate Vertex Buffer
 	glEnableClientState( GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, vertex.data() );
+	glVertexPointer(3, GL_FLOAT, 0, mesh.vertex.data() );
 
 	//Use Shader
 	glUseProgram(shader.shaderProgram);
@@ -34,7 +33,7 @@ void OpenglRenderer::Draw(){
 	//Draw Mesh with Indices
 	//Design: Should Thing about implementing VBOs in a VAB
 	//TTA: Should I also Generate a buffer and leave the vertices in there ?
-	glDrawElements(Mode, indices.size() , GL_UNSIGNED_BYTE, indices.data() );
+	glDrawElements(Mode, mesh.indices.size() , GL_UNSIGNED_BYTE, mesh.indices.data() );
 
 	//Disable Shader
 	glUseProgram(0);

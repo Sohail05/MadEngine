@@ -13,4 +13,12 @@ due to its inactive support and outdated version of chromium.
 
 * Clean up project
 
-* Abstract sub-systems and Class/Data structures 
+* Abstract sub-systems and Class/Data structures
+
+
+04/28/2015
+----------
+
+* Remove Awesomium and clean up
+
+* Removed Controls due to Awesomium
